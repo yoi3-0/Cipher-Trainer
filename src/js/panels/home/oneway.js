@@ -31,8 +31,7 @@ class HomePanelTrain extends React.Component {
             type: -1,
         };
         let DefaultInputlData = {
-            text: "",
-            userFunc: "",
+            answer: "",
         };
 
         this.state = {
@@ -42,8 +41,8 @@ class HomePanelTrain extends React.Component {
         };
 
         this.handleInput = (e) => {
-            let value = e.currentTarget.value ||-1;
-            console.log("Выбор - " + value);
+            let value = e.currentTarget.value;
+            //console.log("Выбор - " + value);
             /* if (e.currentTarget.type === 'checkbox') {
                  value = e.currentTarget.checked;
              }*/
@@ -57,7 +56,7 @@ class HomePanelTrain extends React.Component {
 
         this.clearForm = () => {
             this.setState({
-                inputData: DefaultLevelData
+                inputData: DefaultInputlData
             });
         };
         this.confirmInput = this.confirmInput.bind(this);
@@ -70,8 +69,10 @@ class HomePanelTrain extends React.Component {
             default: trainType="Ошибка"; break;
         }
         this.setState({
-            trainType: trainType
+            trainType: trainType,
+            itog: ""
         });
+        this.makeCipher();
        /* this.setState({
             inputData: this.props.formData
         });*/
@@ -98,10 +99,30 @@ class HomePanelTrain extends React.Component {
             </Alert>
         );
     }
-    commitTrain()
+    getRandomInt(max) {
+        return Math.floor(Math.random() * Math.floor(max));
+    }
+    makeCipher()
     {
-        if (this.state.inputData.type===-1 || this.state.inputData.level===-1)
-            this.openPopout(); else this.props.setPage('home', 'oneway');
+        let text=["всем привет", "тестовое сообщение", "второе сообщение"];
+        let message=text[this.getRandomInt(3)];
+        var itog="";
+        switch(this.state.levelData.level)
+        {
+            case "0":
+                let cons0=this.getRandomInt(10)+1;
+                for (let i=0;i<message.length;i++)
+                    itog+=String.fromCodePoint(message.charCodeAt(i)+cons0);
+                break;
+            case "1":
+                let cons1=this.getRandomInt(100)+1;
+                let module=this.getRandomInt(20)+33;
+                for (let i=0;i<message.length;i++)
+                    itog+=String.fromCodePoint(1072+Number(message.charCodeAt(i)+cons1)%module);
+                break;
+            default: itog="Ошибка"
+        }
+        this.setState({Message:itog});
     }
     confirmExit()
     {
@@ -109,7 +130,13 @@ class HomePanelTrain extends React.Component {
     }
     confirmInput()
     {
-        this.setState({disallowText:true});
+        let decoded="";
+       // console.log(eval(this.state.inputData.answer.substr(0, this.state.inputData.answer.indexOf('x'))+this.state.Message.charCodeAt(5)+this.state.inputData.answer.substr(this.state.inputData.answer.indexOf('x') + 1, this.state.inputData.answer.length - 1)));
+        for (let i=0;i<this.state.Message.length;i++) {
+            decoded+=String.fromCharCode(eval(this.state.inputData.answer.substr(0, this.state.inputData.answer.indexOf('x'))+this.state.Message.charCodeAt(i)+this.state.inputData.answer.substr(this.state.inputData.answer.indexOf('x') + 1, this.state.inputData.answer.length - 1)));
+        }
+        console.log(decoded);
+        this.setState({Decode:decoded});
     }
     render() {
         const {id, setPage, goBack} = this.props;
@@ -122,22 +149,22 @@ class HomePanelTrain extends React.Component {
                     {this.state.trainType}
                 </PanelHeader>
                 <Div>
-                    <Group>
-                    <Input value={this.state.inputData.text}
+                    Зашифрованное сообщение: <b>{this.state.Message}</b>
+                </Div>
+                <Div>
+                    Ваша задача - ввести функцю, применив которую к каждому символу, можно получить зашифрованное сообщение.
+                    В качестве "буквы" используйте <b>x</b>, а для возведения в степень <b>**</b> Пример ввода: <b>(x**2+1)%5</b>
+                </Div>
+                <Div>
+                    <Input value={this.state.inputData.answer}
                            onChange={this.handleInput}
-                           name="text"
-                           placeholder="Текст для шифровки"
-                           disabled={this.state.disallowText}
+                           name="answer"
+                           placeholder="Ваш ответ"
                            autoComplete="off"/>
-                        <Button size="l" stretched={true} onClick={this.confirmInput}>Подтвердить</Button>
-                    </Group>
-                    <Group>
-                    <Input value={this.state.inputData.workposition}
-                           onChange={this.handleInput}
-                           name="workposition"
-                           placeholder="Должность"
-                           autoComplete="off"/>
-                    </Group>
+                           <Button size="l" stretched={true} onClick={this.confirmInput}>Подтвердить</Button>
+                </Div>
+                <Div>
+                    {this.state.Decode}
                 </Div>
             </Panel>
         );
