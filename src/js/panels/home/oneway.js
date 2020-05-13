@@ -30,9 +30,15 @@ class HomePanelTrain extends React.Component {
             level: -1,
             type: -1,
         };
+        let DefaultInputlData = {
+            text: "",
+            userFunc: "",
+        };
 
         this.state = {
-            inputData: props.inputData['Settings'] || DefaultLevelData
+            levelData: props.inputData['Settings'] || DefaultLevelData,
+            inputData: DefaultInputlData,
+            disallowText: false,
         };
 
         this.handleInput = (e) => {
@@ -54,10 +60,11 @@ class HomePanelTrain extends React.Component {
                 inputData: DefaultLevelData
             });
         };
+        this.confirmInput = this.confirmInput.bind(this);
     }
     componentDidMount() {
         let trainType;
-        switch(this.state.inputData.type)
+        switch(this.state.levelData.type)
         {
             case "1": trainType='"Обратные" функции'; break;
             default: trainType="Ошибка"; break;
@@ -69,7 +76,7 @@ class HomePanelTrain extends React.Component {
             inputData: this.props.formData
         });*/
        // this.props.setFormData('Settings', this.state.inputData);
-        console.log(this.state.inputData);
+        console.log(this.state.levelData);
        // console.log( this.props.inputData['Settings']);
     }
     openPopout() {
@@ -100,6 +107,10 @@ class HomePanelTrain extends React.Component {
     {
         this.openPopout()
     }
+    confirmInput()
+    {
+        this.setState({disallowText:true});
+    }
     render() {
         const {id, setPage, goBack} = this.props;
 
@@ -111,6 +122,22 @@ class HomePanelTrain extends React.Component {
                     {this.state.trainType}
                 </PanelHeader>
                 <Div>
+                    <Group>
+                    <Input value={this.state.inputData.text}
+                           onChange={this.handleInput}
+                           name="text"
+                           placeholder="Текст для шифровки"
+                           disabled={this.state.disallowText}
+                           autoComplete="off"/>
+                        <Button size="l" stretched={true} onClick={this.confirmInput}>Подтвердить</Button>
+                    </Group>
+                    <Group>
+                    <Input value={this.state.inputData.workposition}
+                           onChange={this.handleInput}
+                           name="workposition"
+                           placeholder="Должность"
+                           autoComplete="off"/>
+                    </Group>
                 </Div>
             </Panel>
         );

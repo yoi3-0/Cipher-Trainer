@@ -1,7 +1,8 @@
 {
-  "name": "vkminiappboilerplate",
+  "name": "cipher-trainer",
   "version": "1.0.0",
   "description": "",
+  "homepage": "https://yoi3-0.github.io/Cipher-Trainer/",
   "main": "index.js",
   "scripts": {
     "start": "cross-env PORT=10888 HTTPS=true react-scripts start",
@@ -14,6 +15,7 @@
   "license": "MIT",
   "devDependencies": {
     "cross-env": "^5.2.1",
+    "gh-pages": "^2.2.0",
     "react-hot-loader": "^4.12.19",
     "react-scripts": "^2.1.8",
     "redux-devtools-extension": "^2.13.8"
