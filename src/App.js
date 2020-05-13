@@ -103,7 +103,7 @@ class App extends React.Component {
                         >
                             <HomePanelBase id="base" withoutEpic={false}/>
                             <HomePanelOneWay id="oneway"/>
-                            <HomePanelTrain id="train"/>
+                            <HomePanelTrain id="train" popout={popout}/>
                         </View>
                     </Root>
                     <Root id="more" activeView={activeView} popout={popout}>

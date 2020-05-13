@@ -42,7 +42,7 @@ class HomePanelBase extends React.Component {
 
         return (
             <Panel id={id}>
-                <PanelHeader>Выбор темы</PanelHeader>
+                <PanelHeader>Главная</PanelHeader>
                 <Group>
                     <Div>
                         <Button mode="secondary" size="l" stretched={true} onClick={() => setPage('home', 'oneway')}>Выбор уровня

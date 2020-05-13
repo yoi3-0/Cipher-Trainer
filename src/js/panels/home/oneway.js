@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from "redux";
 
-import {goBack, openPopout, closePopout, openModal} from "../../store/router/actions";
+import {goBack, openPopout, closePopout, openModal, setPage} from "../../store/router/actions";
 import * as VK from '../../services/VK';
 
 import {renderGroupsList} from '../../services/renderers';
@@ -17,30 +17,30 @@ import {
     PanelSpinner,
     PanelHeaderBack,
     Header, Select,
-    FormLayout, FormLayoutGroup, Input, Checkbox
+    FormLayout, FormLayoutGroup, Input, Checkbox, Alert
 } from "@vkontakte/vkui";
 import {setFormData} from "../../store/formData/actions";
 
-class HomePanelOneway extends React.Component {
+class HomePanelTrain extends React.Component {
 
     constructor(props) {
         super(props);
 
-        let defaultInputData = {
+        let DefaultLevelData = {
             level: -1,
             type: -1,
         };
 
         this.state = {
-            inputData: props.inputData['Settings'] || defaultInputData
+            inputData: props.inputData['Settings'] || DefaultLevelData
         };
 
         this.handleInput = (e) => {
-            let value = e.currentTarget.value;
-            console.log("Выбор - " + e.currentTarget.value);
-           /* if (e.currentTarget.type === 'checkbox') {
-                value = e.currentTarget.checked;
-            }*/
+            let value = e.currentTarget.value ||-1;
+            console.log("Выбор - " + value);
+            /* if (e.currentTarget.type === 'checkbox') {
+                 value = e.currentTarget.checked;
+             }*/
             this.setState({
                 inputData: {
                     ...this.state.inputData,
@@ -51,52 +51,67 @@ class HomePanelOneway extends React.Component {
 
         this.clearForm = () => {
             this.setState({
-                inputData: defaultInputData
+                inputData: DefaultLevelData
             });
         };
     }
-
-    componentWillUnmount() {
-        this.props.setFormData('Settings', this.state.inputData);
+    componentDidMount() {
+        let trainType;
+        switch(this.state.inputData.type)
+        {
+            case "1": trainType='"Обратные" функции'; break;
+            default: trainType="Ошибка"; break;
+        }
+        this.setState({
+            trainType: trainType
+        });
+       /* this.setState({
+            inputData: this.props.formData
+        });*/
+       // this.props.setFormData('Settings', this.state.inputData);
+        console.log(this.state.inputData);
+       // console.log( this.props.inputData['Settings']);
     }
-
+    openPopout() {
+        this.props.openPopout(
+            <Alert
+                actions={[{
+                    title: 'Нет',
+                    autoclose: true,
+                    style: 'cancel',
+                }, {
+                    title: 'Да',
+                    autoclose: true,
+                    action: this.props.goBack
+                }]}
+                onClose={() => this.props.closePopout()}
+            >
+                <h2>Подтвердите действие</h2>
+                <p>Вы действительно хотите завершить упражнение?</p>
+            </Alert>
+        );
+    }
+    commitTrain()
+    {
+        if (this.state.inputData.type===-1 || this.state.inputData.level===-1)
+            this.openPopout(); else this.props.setPage('home', 'oneway');
+    }
+    confirmExit()
+    {
+        this.openPopout()
+    }
     render() {
-        const {id, goBack} = this.props;
+        const {id, setPage, goBack} = this.props;
 
         return (
             <Panel id={id}>
                 <PanelHeader
-                    left={<PanelHeaderBack onClick={() => goBack()}/>}
+                    left={<PanelHeaderBack onClick={() => this.confirmExit()}/>}
                 >
-                    Выбор уровня
+                    {this.state.trainType}
                 </PanelHeader>
-                <Group>
-                    <FormLayout>
-                        <FormLayoutGroup top="Уровень сложности">
-                            <Select placeholder="Выберите уровень"
-                                    onChange={this.handleInput}
-                                    name="level"
-                                    value={this.state.inputData.level}
-                            >
-                                <option value="0">Тренировка</option>
-                                <option value="1">Легко</option>
-                                <option value="2">Средне</option>
-                                <option value="3">Сложно</option>
-                            </Select>
-                            <Select placeholder="Выберите уровень"
-                                    onChange={this.handleInput}
-                                    name="type"
-                                    value={this.state.inputData.type}
-                            >
-                                <option value="1">Обратные функции</option>
-                            </Select>
-                        </FormLayoutGroup>
-                    </FormLayout>
-                    <Div className="buttons-group">
-                        <Button size="l" stretched={true} onClick={() => goBack()}>Сохранить</Button>
-                        <Button size="l" stretched={true} onClick={this.clearForm}>Очистить</Button>
-                    </Div>
-                </Group>
+                <Div>
+                </Div>
             </Panel>
         );
     }
@@ -111,7 +126,11 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
     setFormData,
-    goBack
+    goBack,
+    setPage,
+    openPopout,
+    closePopout,
+    openModal
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomePanelOneway);
+export default connect(mapStateToProps, mapDispatchToProps)(HomePanelTrain);
