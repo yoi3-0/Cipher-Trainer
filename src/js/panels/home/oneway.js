@@ -126,12 +126,28 @@ class HomePanelTrain extends React.Component {
                 let cons0=this.getRandomInt(10)+1;
                 for (let i=0;i<message.length;i++)
                     itog+=String.fromCodePoint(message.charCodeAt(i)+cons0);
+                this.setState({CipherFunc: "x+"+cons0});
                 break;
             case "1":
                 let cons1=this.getRandomInt(100)+1;
                 let module=this.getRandomInt(20)+33;
                 for (let i=0;i<message.length;i++)
                     itog+=String.fromCodePoint(1072+Number(message.charCodeAt(i)+cons1)%module);
+                this.setState({CipherFunc: "(x+"+cons1+")%"+module});
+                break;
+            case "2":
+                let cons2=this.getRandomInt(20)+1;
+                let module2=this.getRandomInt(20)+33;
+                for (let i=0;i<message.length;i++)
+                    itog+=String.fromCodePoint(1072+Number(message.charCodeAt(i)*cons2)%module2);
+                this.setState({CipherFunc: "(x*"+cons2+")%"+module2});
+                break;
+            case "3":
+                let cons3=this.getRandomInt(10)+1;
+                let module3=this.getRandomInt(20)+33;
+                for (let i=0;i<message.length;i++)
+                    itog+=String.fromCodePoint(1072+Number(message.charCodeAt(i)**cons3)%module3);
+                this.setState({CipherFunc: "(x**"+cons3+")%"+module3});
                 break;
             default: itog="Ошибка"
         }
@@ -174,6 +190,7 @@ class HomePanelTrain extends React.Component {
                     Ваша задача - ввести функцю, применив которую к каждому символу, можно получить зашифрованное сообщение.
                     В качестве "буквы" используйте <b>x</b>, а для возведения в степень <b>**</b> Пример ввода: <b>(x**2+1)%5</b>
                 </Div>
+                Функция по которой шифровали: {this.state.CipherFunc}
                 <Div>
                     <Input value={this.state.inputData.answer}
                            pattern="[+]7\s[\(]\d{3}[\)]\s\d{3}[\-]\d{2}[\-]\d{2}"
