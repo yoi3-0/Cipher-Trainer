@@ -42,10 +42,14 @@ class HomePanelTrain extends React.Component {
 
         this.handleInput = (e) => {
             let value = e.currentTarget.value;
+
             //console.log("Выбор - " + value);
             /* if (e.currentTarget.type === 'checkbox') {
                  value = e.currentTarget.checked;
              }*/
+            // if ((value[value.length-1]>'a' && value[value.length-1]<'z') && value[value.length-1]!='x')
+            value=value.replace(/[A-WY-Za-wy-zА-Яа-яЁё]/, '');
+                console.log(value);
             this.setState({
                 inputData: {
                     ...this.state.inputData,
@@ -99,6 +103,15 @@ class HomePanelTrain extends React.Component {
             </Alert>
         );
     }
+    wrongInput() {
+        this.props.openPopout(
+            <Alert
+                onClose={() => this.props.closePopout()}
+            >
+                <h2>Вы не ввели x!</h2>
+            </Alert>
+        );
+    }
     getRandomInt(max) {
         return Math.floor(Math.random() * Math.floor(max));
     }
@@ -130,11 +143,17 @@ class HomePanelTrain extends React.Component {
     }
     confirmInput()
     {
+        if (this.state.inputData.answer.indexOf('x')==-1) {this.wrongInput(); return;}
         let decoded="";
-       // console.log(eval(this.state.inputData.answer.substr(0, this.state.inputData.answer.indexOf('x'))+this.state.Message.charCodeAt(5)+this.state.inputData.answer.substr(this.state.inputData.answer.indexOf('x') + 1, this.state.inputData.answer.length - 1)));
+       // console.log(this.state.inputData.answer.indexOf('%')!=-1);
+     //  console.log(eval(this.state.inputData.answer.substr(0, this.state.inputData.answer.indexOf('x'))+this.state.Message.charCodeAt(5)+this.state.inputData.answer.substr(this.state.inputData.answer.indexOf('x') + 1, this.state.inputData.answer.length - 1)));
         for (let i=0;i<this.state.Message.length;i++) {
+            if (this.state.inputData.answer.indexOf('%')!=-1)
+                decoded+=String.fromCharCode(1072+eval(this.state.inputData.answer.substr(0, this.state.inputData.answer.indexOf('x'))+(this.state.Message.charCodeAt(i)-1072)+this.state.inputData.answer.substr(this.state.inputData.answer.indexOf('x') + 1, this.state.inputData.answer.length - 1)));
+                else
             decoded+=String.fromCharCode(eval(this.state.inputData.answer.substr(0, this.state.inputData.answer.indexOf('x'))+this.state.Message.charCodeAt(i)+this.state.inputData.answer.substr(this.state.inputData.answer.indexOf('x') + 1, this.state.inputData.answer.length - 1)));
         }
+
         console.log(decoded);
         this.setState({Decode:decoded});
     }
@@ -157,6 +176,7 @@ class HomePanelTrain extends React.Component {
                 </Div>
                 <Div>
                     <Input value={this.state.inputData.answer}
+                           pattern="[+]7\s[\(]\d{3}[\)]\s\d{3}[\-]\d{2}[\-]\d{2}"
                            onChange={this.handleInput}
                            name="answer"
                            placeholder="Ваш ответ"
