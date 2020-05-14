@@ -4,23 +4,23 @@ self.__precacheManifest = [
     "url": "/Cipher-Trainer/static/js/runtime~main.e2da6144.js"
   },
   {
-    "revision": "4988bac85ab5b12d8f6e",
-    "url": "/Cipher-Trainer/static/js/main.bc68cb57.chunk.js"
+    "revision": "bef7427677b86809fcb4",
+    "url": "/Cipher-Trainer/static/js/main.2eddbd9e.chunk.js"
   },
   {
-    "revision": "574690eda34d7ae150eb",
-    "url": "/Cipher-Trainer/static/js/2.3a596d92.chunk.js"
+    "revision": "99019bd957651545a264",
+    "url": "/Cipher-Trainer/static/js/2.9fcdfcbe.chunk.js"
   },
   {
-    "revision": "4988bac85ab5b12d8f6e",
+    "revision": "bef7427677b86809fcb4",
     "url": "/Cipher-Trainer/static/css/main.26e68707.chunk.css"
   },
   {
-    "revision": "574690eda34d7ae150eb",
+    "revision": "99019bd957651545a264",
     "url": "/Cipher-Trainer/static/css/2.bd12921c.chunk.css"
   },
   {
-    "revision": "f788a252c001d676022665577fe1b4ec",
+    "revision": "0d4cb8ec9b5f11cf82f5e45c7a2633c5",
     "url": "/Cipher-Trainer/index.html"
   }
 ];
