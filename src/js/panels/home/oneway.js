@@ -7,6 +7,9 @@ import * as VK from '../../services/VK';
 
 import {renderGroupsList} from '../../services/renderers';
 
+import Icon28RefreshOutline from '@vkontakte/icons/dist/28/refresh_outline';
+import Icon16Dropdown from '@vkontakte/icons/dist/16/dropdown';
+
 import './home.css';
 
 import {
@@ -16,12 +19,13 @@ import {
     Group,
     Button,
     PanelHeader,
-    PanelSpinner,
+    Cell,
     InfoRow,
     SimpleCell,
     PanelHeaderBack,
-    Header, Select,
-    FormLayout, FormLayoutGroup, Input, Checkbox, Alert
+    PanelHeaderContext,
+    PanelHeaderContent,
+    Input, Alert
 } from "@vkontakte/vkui";
 import {setFormData} from "../../store/formData/actions";
 
@@ -29,7 +33,11 @@ class HomePanelTrain extends React.Component {
 
     constructor(props) {
         super(props);
-
+        this.state ={
+            contextOpened: false,
+            mode: 'all',
+            numberOfDone: 0,
+        };
         let DefaultLevelData = {
             level: -1,
             type: -1,
@@ -68,7 +76,14 @@ class HomePanelTrain extends React.Component {
             });
         };
         this.confirmInput = this.confirmInput.bind(this);
+        this.toggleContext = this.toggleContext.bind(this);
+        this.getRandomInt = this.getRandomInt.bind(this);
+        this.makeCipher=this.makeCipher.bind(this);
     }
+    toggleContext () {
+        this.setState({ contextOpened: !this.state.contextOpened });
+    }
+
     componentDidMount() {
         let trainType;
         switch(this.state.levelData.type)
@@ -78,7 +93,8 @@ class HomePanelTrain extends React.Component {
         }
         this.setState({
             trainType: trainType,
-            itog: ""
+            itog: "",
+            numberOfDone: 0,
         });
         this.makeCipher();
        /* this.setState({
@@ -116,9 +132,9 @@ class HomePanelTrain extends React.Component {
             </Alert>
         );
     }
-    getRandomInt(max) {
+    getRandomInt (max) {
         return Math.floor(Math.random() * Math.floor(max));
-    }
+    };
     makeCipher()
     {
         let text=["всем привет", "тестовое сообщение", "второе сообщение"];
@@ -155,7 +171,7 @@ class HomePanelTrain extends React.Component {
                 break;
             default: itog="Ошибка"
         }
-        this.setState({Message:itog});
+        this.setState({Message:itog, contextOpened: false});
     }
     confirmExit()
     {
@@ -185,8 +201,29 @@ class HomePanelTrain extends React.Component {
                 <PanelHeader
                     left={<PanelHeaderBack onClick={() => this.confirmExit()}/>}
                 >
+                    <PanelHeaderContent
+                        aside={<Icon16Dropdown style={{ transform: `rotate(${this.state.contextOpened ? '180deg' : '0'})` }} />}
+                        onClick={this.toggleContext}
+                    >
                     {this.state.trainType}
+                    </PanelHeaderContent>
                 </PanelHeader>
+                <PanelHeaderContext  opened={this.state.contextOpened} onClose={this.toggleContext}>
+                    <List>
+                        <Cell
+                            before={<Icon28RefreshOutline />}
+                            onClick={this.makeCipher}
+                            data-mode="all"
+                        >
+                            Обновить задачу
+                        </Cell>
+                        <Cell
+                            data-mode="managed"
+                        >
+                            Количество верных ответов: {this.state.numberOfDone}
+                        </Cell>
+                    </List>
+                </PanelHeaderContext>
                 <Group>
                     <SimpleCell>
                     <InfoRow header="Зашифрованное сообщение:">
@@ -221,6 +258,7 @@ class HomePanelTrain extends React.Component {
                 </Div>
                     <Div>
                 <Button size="l" stretched={true} onClick={this.confirmInput}>Применить функцию</Button>
+                        <Button size="l" stretched={true} onClick={window.location.reload}>Применить функцию</Button>
                     </Div>
                 </Group>
             </Panel>

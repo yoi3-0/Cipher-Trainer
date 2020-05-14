@@ -23,7 +23,7 @@ class HomePanelProfile extends React.Component {
         super(props);
 
         this.state = {
-            activeTab: props.activeTab["EXAMPLE"] || "modal"
+            activeTab: props.activeTab["EXAMPLE"] || "profile"
         };
     }
 
@@ -50,39 +50,28 @@ class HomePanelProfile extends React.Component {
 
         return (
             <Panel id={id}>
-                <PanelHeader noShadow={true}>Examples 2</PanelHeader>
+                <PanelHeader noShadow={true}>Профиль</PanelHeader>
                 <FixedLayout vertical="top">
                     <Tabs theme="header" mode="default">
                         <HorizontalScroll id="EXAMPLE_TABS_LIST">
+
                             <TabsItem
-                                onClick={() => this.setTab('modal')}
-                                selected={this.state.activeTab === 'modal'}
-                            >
-                                Модальное окно
-                            </TabsItem>
-                            <TabsItem
-                                onClick={() => this.setTab('test')}
-                                selected={this.state.activeTab === 'test'}
+                                onClick={() => this.setTab('profile')}
+                                selected={this.state.activeTab === 'profile'}
                             >
                                 Для теста
                             </TabsItem>
                             <TabsItem
-                                onClick={() => this.setTab('test2')}
-                                selected={this.state.activeTab === 'test2'}
+                                onClick={() => this.setTab('create')}
+                                selected={this.state.activeTab === 'create'}
                             >
-                                Для теста 2
-                            </TabsItem>
-                            <TabsItem
-                                onClick={() => this.setTab('test3')}
-                                selected={this.state.activeTab === 'test3'}
-                            >
-                                Для теста 3
+                                Модальное окно
                             </TabsItem>
                         </HorizontalScroll>
                     </Tabs>
                 </FixedLayout>
                 <Group style={boxStyle}>
-                    {this.state.activeTab === 'modal' && <CellButton onClick={() => setPage('modal', 'filters')}>
+                    {this.state.activeTab === 'create' && <CellButton onClick={() => setPage('modal', 'filters')}>
                         Открыть модальное окно
                     </CellButton>}
 
