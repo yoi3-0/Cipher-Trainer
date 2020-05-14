@@ -7,6 +7,8 @@ import * as VK from '../../services/VK';
 
 import {renderGroupsList} from '../../services/renderers';
 
+import './home.css';
+
 import {
     Div,
     List,
@@ -15,6 +17,8 @@ import {
     Button,
     PanelHeader,
     PanelSpinner,
+    InfoRow,
+    SimpleCell,
     PanelHeaderBack,
     Header, Select,
     FormLayout, FormLayoutGroup, Input, Checkbox, Alert
@@ -183,14 +187,30 @@ class HomePanelTrain extends React.Component {
                 >
                     {this.state.trainType}
                 </PanelHeader>
-                <Div>
-                    Зашифрованное сообщение: <b>{this.state.Message}</b>
-                </Div>
-                <Div>
-                    Ваша задача - ввести функцю, применив которую к каждому символу, можно получить зашифрованное сообщение.
-                    В качестве "буквы" используйте <b>x</b>, а для возведения в степень <b>**</b> Пример ввода: <b>(x**2+1)%5</b>
-                </Div>
-                Функция по которой шифровали: {this.state.CipherFunc}
+                <Group>
+                    <SimpleCell>
+                    <InfoRow header="Зашифрованное сообщение:">
+                         <b>{this.state.Message}</b>
+                    </InfoRow>
+                    </SimpleCell>
+                    <SimpleCell>
+                        <InfoRow header="Сообщение после применения функции:">
+                            <b>{this.state.Decode}</b>
+                        </InfoRow>
+                    </SimpleCell>
+                    <Div>
+                    <InfoRow header="Задача">
+                        Ваша задача - ввести функцю, применив которую к каждому символу, можно получить зашифрованное сообщение.
+                        В качестве "буквы" используйте <b>x</b>, а для возведения в степень <b>**</b> Пример ввода: <b>(x**2+1)%5</b>
+                    </InfoRow>
+                    </Div>
+                <SimpleCell>
+                    <InfoRow header="Функция по которой шифровали:">
+                        <b>{this.state.CipherFunc} </b>
+                    </InfoRow>
+                </SimpleCell>
+                </Group>
+                <Group>
                 <Div>
                     <Input value={this.state.inputData.answer}
                            pattern="[+]7\s[\(]\d{3}[\)]\s\d{3}[\-]\d{2}[\-]\d{2}"
@@ -198,11 +218,11 @@ class HomePanelTrain extends React.Component {
                            name="answer"
                            placeholder="Ваш ответ"
                            autoComplete="off"/>
-                           <Button size="l" stretched={true} onClick={this.confirmInput}>Подтвердить</Button>
                 </Div>
-                <Div>
-                    {this.state.Decode}
-                </Div>
+                    <Div>
+                <Button size="l" stretched={true} onClick={this.confirmInput}>Применить функцию</Button>
+                    </Div>
+                </Group>
             </Panel>
         );
     }

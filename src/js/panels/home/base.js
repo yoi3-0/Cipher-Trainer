@@ -3,9 +3,11 @@ import {connect} from 'react-redux';
 
 import {closePopout, goBack, openModal, openPopout, setPage} from '../../store/router/actions';
 
-import {Div, Panel, Alert, Group, Button, PanelHeader} from "@vkontakte/vkui"
+import {Div, Panel, Alert, Group, Button, PanelHeader, Text} from "@vkontakte/vkui"
 
 import Icon24Filter from '@vkontakte/icons/dist/24/filter';
+
+import './home.css';
 
 class HomePanelBase extends React.Component {
 
@@ -43,12 +45,17 @@ class HomePanelBase extends React.Component {
         return (
             <Panel id={id}>
                 <PanelHeader>Главная</PanelHeader>
+                <Div>
+                    <Text weight="medium" className='textstart'>Добро пожаловать в математический тренажёр!<br/>
+                    Данное мини-приложение позволяет потренироваться в расшифровке текстов, зашифрованных рзличными алгоритмами шифрования.
+                    </Text>
+                </Div>
                 <Group>
-                    <Div>
-                        <Button mode="secondary" size="l" stretched={true} onClick={() => setPage('home', 'oneway')}>Не нажимать,дебаг</Button>
+                    <Div className="divbutt">
+                        <Button mode="secondary" size="l"  className="startbutt"  onClick={() => setPage('home', 'train')}>Начать</Button>
                     </Div>
                     <Div>
-                        <Button mode="secondary" size="l" style={{background: "blue", color: "black"}} stretched={true} onClick={() => setPage('home', 'train')}>Начать</Button>
+                        <Button mode="secondary" size="l" stretched={true} onClick={() => setPage('home', 'oneway')}>Не нажимать,дебаг</Button>
                     </Div>
                     {this.state.showImg && <Div className="div-center">
                         <img src="https://vk.com/sticker/1-12676-256" alt="Стикер VK"/>
