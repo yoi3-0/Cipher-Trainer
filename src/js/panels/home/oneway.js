@@ -257,8 +257,7 @@ class HomePanelTrain extends React.Component {
                            autoComplete="off"/>
                 </Div>
                     <Div>
-                <Button size="l" stretched={true} onClick={this.confirmInput}>Применить функцию</Button>
-                        <Button size="l" stretched={true} onClick={window.location.reload}>Применить функцию</Button>
+                    <Button size="l" stretched={true} onClick={this.confirmInput}>Применить функцию</Button>
                     </Div>
                 </Group>
             </Panel>
