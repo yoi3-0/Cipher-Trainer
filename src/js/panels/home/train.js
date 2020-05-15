@@ -29,6 +29,7 @@ class HomePanelTrain extends React.Component {
         let DefaultLevelData = {
             level: -1,
             type: -1,
+            alpha: -1,
         };
 
         this.state = {
@@ -69,7 +70,7 @@ class HomePanelTrain extends React.Component {
                 onClose={() => this.props.closePopout()}
             >
                 <h2>Ошибка</h2>
-                <p>Выберите уровень и тип упражнения</p>
+                <p>Заполните все поля</p>
             </Alert>
         );
     }

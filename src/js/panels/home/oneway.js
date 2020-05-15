@@ -9,6 +9,9 @@ import {renderGroupsList} from '../../services/renderers';
 
 import Icon28RefreshOutline from '@vkontakte/icons/dist/28/refresh_outline';
 import Icon16Dropdown from '@vkontakte/icons/dist/16/dropdown';
+import Icon16Done from '@vkontakte/icons/dist/16/done';
+
+import bridge from '@vkontakte/vk-bridge';
 
 import './home.css';
 
@@ -25,7 +28,8 @@ import {
     PanelHeaderBack,
     PanelHeaderContext,
     PanelHeaderContent,
-    Input, Alert
+    Input, Alert,
+    Snackbar, Avatar
 } from "@vkontakte/vkui";
 import {setFormData} from "../../store/formData/actions";
 
@@ -37,6 +41,11 @@ class HomePanelTrain extends React.Component {
             contextOpened: false,
             mode: 'all',
             numberOfDone: 0,
+            showDecode: false,
+            Coded: "",
+            color: "red",
+            Decode: "",
+            StorageLevel: 0,
         };
         let DefaultLevelData = {
             level: -1,
@@ -96,6 +105,21 @@ class HomePanelTrain extends React.Component {
             itog: "",
             numberOfDone: 0,
         });
+        bridge.subscribe((event) => {
+            switch (event.detail.type) {
+                case 'VKWebAppStorageSetResult':
+                    break;
+                case 'VKWebAppStorageGetResult':
+                    this.setState({StorageLevel: event.detail.data.keys[0].value});
+                    break;
+                case 'VKWebAppStorageGetFailed':
+                    this.setState({StorageLevel: ""});
+                    break;
+                default: console.log(event.detail.type);
+                    break;
+            }
+            console.log('new message', event.detail.data);
+        });
         this.makeCipher();
        /* this.setState({
             inputData: this.props.formData
@@ -132,13 +156,31 @@ class HomePanelTrain extends React.Component {
             </Alert>
         );
     }
+    rightAnswer() {
+        this.props.openPopout(
+            <Snackbar
+                layout="vertical"
+                onClose={() => this.props.closePopout()}
+                before={<Avatar size={24} style={{background: "blue"}}><Icon16Done fill="#fff" width={14} height={14} /></Avatar>}
+            >
+                Правильный ответ! Было зашифровано: {this.state.Coded}
+            </Snackbar>
+        );
+        this.makeCipher();
+    }
     getRandomInt (max) {
         return Math.floor(Math.random() * Math.floor(max));
     };
     makeCipher()
     {
-        let text=["всем привет", "тестовое сообщение", "второе сообщение"];
-        let message=text[this.getRandomInt(3)];
+        this.setState({inputData: {answer: ""}, showDecode: false})
+        let text=["привет", "сообщение", "салют", "пончик", "клуб", "алгоритм", "тетрадь", "танцор", "коробка", "гараж", "задание",
+        "массив", "тостер", "бутерброд", "полка", "шкаф", "рубашка", "монитор", "картинка", "доступ", "шифр", "пакет", "самокат",
+        "песня", "игрушка", "приложение", "голубь", "кот", "собака", "ветер", "снег", "дерево", "перчатка", "книга", "чехол", "чемодан",
+        "инструкция", "расписание", "данные", "зеркало", "распутье", "гнездп", "йод", "скотч", "господин", "история", "деньги", "смех",
+        "забота", "напиток", "вода", "жизнь", "шкатулка", "булочка", "ручка", "шапка", "лохмотья", "очередь", "крем", "уход", "гонка",
+        "скорость", "реакция", "секрет", "рейтинг", "телефон", "посылка", "задумка", "идея", "исполитель", "каникулы", "провод", "наклейка"]; //6 7 5
+        let message=text[this.getRandomInt(73)];
         var itog="";
         switch(this.state.levelData.level)
         {
@@ -171,7 +213,7 @@ class HomePanelTrain extends React.Component {
                 break;
             default: itog="Ошибка"
         }
-        this.setState({Message:itog, contextOpened: false});
+        this.setState({Message:itog, contextOpened: false, Coded: message});
     }
     confirmExit()
     {
@@ -191,7 +233,16 @@ class HomePanelTrain extends React.Component {
         }
 
         console.log(decoded);
-        this.setState({Decode:decoded});
+        if (decoded==this.state.Coded) {
+            this.setState({
+                Decode: decoded,
+                showDecode: true,
+                color: "green",
+                numberOfDone: this.state.numberOfDone + 1
+            });
+            this.rightAnswer();
+        }
+        else this.setState({Decode:decoded, showDecode: true, color: "red"});
     }
     render() {
         const {id, setPage, goBack} = this.props;
@@ -218,7 +269,7 @@ class HomePanelTrain extends React.Component {
                             Обновить задачу
                         </Cell>
                         <Cell
-                            data-mode="managed"
+                            data-mode="rightAns"
                         >
                             Количество верных ответов: {this.state.numberOfDone}
                         </Cell>
@@ -230,11 +281,13 @@ class HomePanelTrain extends React.Component {
                          <b>{this.state.Message}</b>
                     </InfoRow>
                     </SimpleCell>
-                    <SimpleCell>
+                    {this.state.showDecode &&
+                    <SimpleCell style={{background: this.state.color}}>
                         <InfoRow header="Сообщение после применения функции:">
                             <b>{this.state.Decode}</b>
                         </InfoRow>
                     </SimpleCell>
+                    }
                     <Div>
                     <InfoRow header="Задача">
                         Ваша задача - ввести функцю, применив которую к каждому символу, можно получить зашифрованное сообщение.
