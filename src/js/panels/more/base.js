@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import {setPage} from "../../store/router/actions";
+import {setPage, goBack, openPopout, closePopout, openModal} from "../../store/router/actions";
 import {setActiveTab, setScrollPositionByID} from "../../store/vk/actions";
 import {restoreScrollPosition} from "../../services/_functions";
 
@@ -14,8 +14,9 @@ import {
     FixedLayout,
     HorizontalScroll,
     TabsItem,
-    Tabs
+    Tabs, PanelHeaderBack
 } from "@vkontakte/vkui";
+import {setFormData} from "../../store/formData/actions";
 
 class HomePanelProfile extends React.Component {
 
@@ -50,7 +51,11 @@ class HomePanelProfile extends React.Component {
 
         return (
             <Panel id={id}>
-                <PanelHeader noShadow={true}>Профиль</PanelHeader>
+                <PanelHeader
+                    left={<PanelHeaderBack onClick={() => goBack()}/>}
+                >
+                    Обучение
+                </PanelHeader>
                 <FixedLayout vertical="top">
                     <Tabs theme="header" mode="default">
                         <HorizontalScroll id="EXAMPLE_TABS_LIST">
@@ -74,8 +79,6 @@ class HomePanelProfile extends React.Component {
                     {this.state.activeTab === 'create' && <CellButton onClick={() => setPage('modal', 'filters')}>
                         Открыть модальное окно
                     </CellButton>}
-
-                    {this.state.activeTab !== 'modal' && <Div>{this.state.activeTab}</Div>}
                 </Group>
             </Panel>
         );
@@ -90,8 +93,12 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
+    setFormData,
+    goBack,
     setPage,
-    setActiveTab,
+    openPopout,
+    closePopout,
+    openModal,
     setScrollPositionByID
 };
 

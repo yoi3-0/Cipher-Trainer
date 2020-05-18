@@ -14,8 +14,7 @@ import HomePanelBase from './js/panels/home/base';
 import HomePanelOneWay from './js/panels/home/oneway';
 import HomePanelTrain from './js/panels/home/train'
 
-import MorePanelBase from './js/panels/more/base';
-import MorePanelExample from './js/panels/more/example';
+import HomePanelEdu from './js/panels/home/education';
 
 import HomeBotsListModal from './js/components/modals/HomeBotsListModal';
 import HomeBotInfoModal from './js/components/modals/HomeBotInfoModal';
@@ -81,18 +80,6 @@ class App extends React.Component {
 
         return (
             <ConfigProvider isWebView={true} scheme={colorScheme}>
-                <Epic activeStory={activeStory} tabbar={
-                    <Tabbar>
-                        <TabbarItem
-                            onClick={() => setStory('home', 'base')}
-                            selected={activeStory === 'home'}
-                        ><Icon28Newsfeed/></TabbarItem>
-                        <TabbarItem
-                            onClick={() => setStory('more', 'callmodal')}
-                            selected={activeStory === 'more'}
-                        ><Icon28More/></TabbarItem>
-                    </Tabbar>
-                }>
                     <Root id="home" activeView={activeView} popout={popout}>
                         <View
                             id="home"
@@ -104,29 +91,9 @@ class App extends React.Component {
                             <HomePanelBase id="base" withoutEpic={false}/>
                             <HomePanelOneWay id="oneway"/>
                             <HomePanelTrain id="train" popout={popout}/>
+                            <HomePanelEdu id="education"/>
                         </View>
                     </Root>
-                    <Root id="more" activeView={activeView} popout={popout}>
-                        <View
-                            id="more"
-                            modal={homeModals}
-                            activePanel={getActivePanel("more")}
-                            history={history}
-                            onSwipeBack={() => goBack()}
-                        >
-                            <MorePanelBase id="callmodal"/>
-                        </View>
-                        <View
-                            id="modal"
-                            modal={homeModals}
-                            activePanel={getActivePanel("modal")}
-                            history={history}
-                            onSwipeBack={() => goBack()}
-                        >
-                            <MorePanelExample id="filters"/>
-                        </View>
-                    </Root>
-                </Epic>
             </ConfigProvider>
         );
     }

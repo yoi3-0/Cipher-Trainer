@@ -47,15 +47,14 @@ class HomePanelBase extends React.Component {
                 <PanelHeader>Главная</PanelHeader>
                 <Div>
                     <Text weight="medium" className='textstart'>Добро пожаловать в математический тренажёр!<br/>
-                    Данное мини-приложение позволяет потренироваться в расшифровке текстов, зашифрованных рзличными алгоритмами шифрования.
+                    Данное мини-приложение позволяет потренироваться в расшифровке текстов, зашифрованных различными алгоритмами шифрования.
                     </Text>
                 </Div>
                 <Group>
                     <Div className="divbutt">
                         <Button mode="secondary" size="l"  className="startbutt"  onClick={() => setPage('home', 'train')}>Начать</Button>
-                    </Div>
-                    <Div>
-                        <Button mode="secondary" size="l" stretched={true} onClick={() => setPage('home', 'oneway')}>Не нажимать,дебаг</Button>
+
+                        <Button mode="secondary" size="l"  className="startbutt2"  onClick={() => setPage('home', 'education')}>Обучение</Button>
                     </Div>
                     {this.state.showImg && <Div className="div-center">
                         <img src="https://vk.com/sticker/1-12676-256" alt="Стикер VK"/>

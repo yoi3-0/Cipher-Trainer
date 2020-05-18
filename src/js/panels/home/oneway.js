@@ -46,6 +46,7 @@ class HomePanelTrain extends React.Component {
             color: "red",
             Decode: "",
             StorageLevel: 0,
+            alphabet: 0,
         };
         let DefaultLevelData = {
             level: -1,
@@ -69,7 +70,7 @@ class HomePanelTrain extends React.Component {
                  value = e.currentTarget.checked;
              }*/
             // if ((value[value.length-1]>'a' && value[value.length-1]<'z') && value[value.length-1]!='x')
-            value=value.replace(/[A-WY-Za-wy-zА-Яа-яЁё]/, '');
+            value=value.replace(/[A-WY-Za-wy-zА-Яа-яЁё]/, '').toLowerCase();
                 console.log(value);
             this.setState({
                 inputData: {
@@ -173,7 +174,7 @@ class HomePanelTrain extends React.Component {
     };
     makeCipher()
     {
-        this.setState({inputData: {answer: ""}, showDecode: false})
+        this.setState({inputData: {answer: ""}, showDecode: false});
         let text=["привет", "сообщение", "салют", "пончик", "клуб", "алгоритм", "тетрадь", "танцор", "коробка", "гараж", "задание",
         "массив", "тостер", "бутерброд", "полка", "шкаф", "рубашка", "монитор", "картинка", "доступ", "шифр", "пакет", "самокат",
         "песня", "игрушка", "приложение", "голубь", "кот", "собака", "ветер", "снег", "дерево", "перчатка", "книга", "чехол", "чемодан",
@@ -185,7 +186,7 @@ class HomePanelTrain extends React.Component {
         switch(this.state.levelData.level)
         {
             case "0":
-                let cons0=this.getRandomInt(10)+1;
+                let cons0=this.getRandomInt(13)+1;
                 for (let i=0;i<message.length;i++)
                     itog+=String.fromCodePoint(message.charCodeAt(i)+cons0);
                 this.setState({CipherFunc: "x+"+cons0});
@@ -194,21 +195,22 @@ class HomePanelTrain extends React.Component {
                 let cons1=this.getRandomInt(100)+1;
                 let module=this.getRandomInt(20)+33;
                 for (let i=0;i<message.length;i++)
-                    itog+=String.fromCodePoint(1072+Number(message.charCodeAt(i)+cons1)%module);
+                    itog+=String.fromCodePoint(1072+Number((message.charCodeAt(i)-1072)+cons1)%module);
                 this.setState({CipherFunc: "(x+"+cons1+")%"+module});
                 break;
             case "2":
                 let cons2=this.getRandomInt(20)+1;
                 let module2=this.getRandomInt(20)+33;
                 for (let i=0;i<message.length;i++)
-                    itog+=String.fromCodePoint(1072+Number(message.charCodeAt(i)*cons2)%module2);
+                    itog+=String.fromCodePoint(1072+Number((message.charCodeAt(i)-1072)*cons2)%module2);
                 this.setState({CipherFunc: "(x*"+cons2+")%"+module2});
                 break;
             case "3":
                 let cons3=this.getRandomInt(10)+1;
                 let module3=this.getRandomInt(20)+33;
-                for (let i=0;i<message.length;i++)
-                    itog+=String.fromCodePoint(1072+Number(message.charCodeAt(i)**cons3)%module3);
+                for (let i=0;i<message.length;i++) {
+                    itog += String.fromCodePoint(1072 + Number((message.charCodeAt(i)-1072) ** cons3) % module3);
+                }
                 this.setState({CipherFunc: "(x**"+cons3+")%"+module3});
                 break;
             default: itog="Ошибка"
