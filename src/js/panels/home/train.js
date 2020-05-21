@@ -103,10 +103,10 @@ class HomePanelTrain extends React.Component {
                                     name="level"
                                     value={this.state.inputData.level}
                             >
-                                <option value="0">Тренировка</option>
-                                <option value="1">Легко</option>
-                                <option value="2">Средне</option>
-                                <option value="3">Сложно</option>
+                                <option value="0" title={"Простешее упражнение для знакомства с интерфейсом"}>Тренировка</option>
+                                <option value="1" title={"Сдвиг и взятие по модулю"}>Легко</option>
+                                <option value="2" title={"Умножение и взятие по модулю"}>Средне</option>
+                                <option value="3" title={"Возведение в степень и взятие по модулю"}>Сложно</option>
                             </Select>
                             <Select placeholder="Выберите упражнение"
                                     onChange={this.handleInput}

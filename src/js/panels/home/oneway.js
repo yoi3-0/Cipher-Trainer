@@ -180,7 +180,7 @@ class HomePanelTrain extends React.Component {
         "песня", "игрушка", "приложение", "голубь", "кот", "собака", "ветер", "снег", "дерево", "перчатка", "книга", "чехол", "чемодан",
         "инструкция", "расписание", "данные", "зеркало", "распутье", "гнездп", "йод", "скотч", "господин", "история", "деньги", "смех",
         "забота", "напиток", "вода", "жизнь", "шкатулка", "булочка", "ручка", "шапка", "лохмотья", "очередь", "крем", "уход", "гонка",
-        "скорость", "реакция", "секрет", "рейтинг", "телефон", "посылка", "задумка", "идея", "исполитель", "каникулы", "провод", "наклейка"]; //6 7 5
+        "скорость", "реакция", "секрет", "рейтинг", "телефон", "посылка", "задумка", "идея", "исполнитель", "каникулы", "провод", "наклейка"]; //6 7 5
         let message=text[this.getRandomInt(73)];
         var itog="";
         switch(this.state.levelData.level)
@@ -195,21 +195,21 @@ class HomePanelTrain extends React.Component {
                 let cons1=this.getRandomInt(100)+1;
                 let module=this.getRandomInt(20)+33;
                 for (let i=0;i<message.length;i++)
-                    itog+=String.fromCodePoint(1072+Number((message.charCodeAt(i)-1072)+cons1)%module);
+                    itog+=String.fromCodePoint(1072+Number((message.charCodeAt(i)-1071)+cons1)%module);
                 this.setState({CipherFunc: "(x+"+cons1+")%"+module});
                 break;
             case "2":
                 let cons2=this.getRandomInt(20)+1;
                 let module2=this.getRandomInt(20)+33;
                 for (let i=0;i<message.length;i++)
-                    itog+=String.fromCodePoint(1072+Number((message.charCodeAt(i)-1072)*cons2)%module2);
+                    itog+=String.fromCodePoint(1072+Number((message.charCodeAt(i)-1071)*cons2)%module2);
                 this.setState({CipherFunc: "(x*"+cons2+")%"+module2});
                 break;
             case "3":
                 let cons3=this.getRandomInt(10)+1;
                 let module3=this.getRandomInt(20)+33;
                 for (let i=0;i<message.length;i++) {
-                    itog += String.fromCodePoint(1072 + Number((message.charCodeAt(i)-1072) ** cons3) % module3);
+                    itog += String.fromCodePoint(1072 + Number((message.charCodeAt(i)-1071) ** cons3) % module3);
                 }
                 this.setState({CipherFunc: "(x**"+cons3+")%"+module3});
                 break;
