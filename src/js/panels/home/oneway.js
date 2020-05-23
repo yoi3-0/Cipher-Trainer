@@ -176,11 +176,11 @@ class HomePanelTrain extends React.Component {
     {
         this.setState({inputData: {answer: ""}, showDecode: false});
         let text=["привет", "сообщение", "салют", "пончик", "клуб", "алгоритм", "тетрадь", "танцор", "коробка", "гараж", "задание",
-        "массив", "тостер", "бутерброд", "полка", "шкаф", "рубашка", "монитор", "картинка", "доступ", "шифр", "пакет", "самокат",
-        "песня", "игрушка", "приложение", "голубь", "кот", "собака", "ветер", "снег", "дерево", "перчатка", "книга", "чехол", "чемодан",
-        "инструкция", "расписание", "данные", "зеркало", "распутье", "гнездп", "йод", "скотч", "господин", "история", "деньги", "смех",
-        "забота", "напиток", "вода", "жизнь", "шкатулка", "булочка", "ручка", "шапка", "лохмотья", "очередь", "крем", "уход", "гонка",
-        "скорость", "реакция", "секрет", "рейтинг", "телефон", "посылка", "задумка", "идея", "исполнитель", "каникулы", "провод", "наклейка"]; //6 7 5
+            "массив", "тостер", "бутерброд", "полка", "шкаф", "рубашка", "монитор", "картинка", "доступ", "шифр", "пакет", "самокат",
+            "песня", "игрушка", "приложение", "голубь", "кот", "собака", "ветер", "снег", "дерево", "перчатка", "книга", "чехол", "чемодан",
+            "инструкция", "расписание", "данные", "зеркало", "распутье", "гнездо", "йод", "скотч", "господин", "история", "деньги", "смех",
+            "забота", "напиток", "вода", "жизнь", "шкатулка", "булочка", "ручка", "шапка", "лохмотья", "очередь", "крем", "уход", "гонка",
+            "скорость", "реакция", "секрет", "рейтинг", "телефон", "посылка", "задумка", "идея", "исполнитель", "каникулы", "провод", "наклейка"]; //6 7 5
         let message=text[this.getRandomInt(73)];
         var itog="";
         switch(this.state.levelData.level)
@@ -196,14 +196,14 @@ class HomePanelTrain extends React.Component {
                 let module=this.getRandomInt(20)+33;
                 for (let i=0;i<message.length;i++)
                     itog+=String.fromCodePoint(1072+Number((message.charCodeAt(i)-1071)+cons1)%module);
-                this.setState({CipherFunc: "(x+"+cons1+")%"+module});
+                this.setState({CipherFunc: "(x+"+cons1+")%"+module+"+1"});
                 break;
             case "2":
                 let cons2=this.getRandomInt(20)+1;
                 let module2=this.getRandomInt(20)+33;
                 for (let i=0;i<message.length;i++)
                     itog+=String.fromCodePoint(1072+Number((message.charCodeAt(i)-1071)*cons2)%module2);
-                this.setState({CipherFunc: "(x*"+cons2+")%"+module2});
+                this.setState({CipherFunc: "(x*"+cons2+")%"+module2+"+1"});
                 break;
             case "3":
                 let cons3=this.getRandomInt(10)+1;
@@ -211,7 +211,7 @@ class HomePanelTrain extends React.Component {
                 for (let i=0;i<message.length;i++) {
                     itog += String.fromCodePoint(1072 + Number((message.charCodeAt(i)-1071) ** cons3) % module3);
                 }
-                this.setState({CipherFunc: "(x**"+cons3+")%"+module3});
+                this.setState({CipherFunc: "(x**"+cons3+")%"+module3+"+1"});
                 break;
             default: itog="Ошибка"
         }
@@ -225,13 +225,16 @@ class HomePanelTrain extends React.Component {
     {
         if (this.state.inputData.answer.indexOf('x')==-1) {this.wrongInput(); return;}
         let decoded="";
+        let codeG=this.state.inputData.answer;
        // console.log(this.state.inputData.answer.indexOf('%')!=-1);
      //  console.log(eval(this.state.inputData.answer.substr(0, this.state.inputData.answer.indexOf('x'))+this.state.Message.charCodeAt(5)+this.state.inputData.answer.substr(this.state.inputData.answer.indexOf('x') + 1, this.state.inputData.answer.length - 1)));
         for (let i=0;i<this.state.Message.length;i++) {
-            if (this.state.inputData.answer.indexOf('%')!=-1)
-                decoded+=String.fromCharCode(1072+eval(this.state.inputData.answer.substr(0, this.state.inputData.answer.indexOf('x'))+(this.state.Message.charCodeAt(i)-1072)+this.state.inputData.answer.substr(this.state.inputData.answer.indexOf('x') + 1, this.state.inputData.answer.length - 1)));
-                else
-            decoded+=String.fromCharCode(eval(this.state.inputData.answer.substr(0, this.state.inputData.answer.indexOf('x'))+this.state.Message.charCodeAt(i)+this.state.inputData.answer.substr(this.state.inputData.answer.indexOf('x') + 1, this.state.inputData.answer.length - 1)));
+                var re = /x/gi
+                let code=codeG.replace(re,(this.state.Message.charCodeAt(i) - 1071));
+                console.log(code);
+                let evres=Number(eval(code));
+                //if (evres<0)  evres=32+evres;
+                decoded += String.fromCharCode(1071 + evres);
         }
 
         console.log(decoded);
