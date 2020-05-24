@@ -89,6 +89,7 @@ class HomePanelTrain extends React.Component {
         this.toggleContext = this.toggleContext.bind(this);
         this.getRandomInt = this.getRandomInt.bind(this);
         this.makeCipher=this.makeCipher.bind(this);
+        this.NOD=this.NOD.bind(this);
     }
     toggleContext () {
         this.setState({ contextOpened: !this.state.contextOpened });
@@ -157,6 +158,11 @@ class HomePanelTrain extends React.Component {
             </Alert>
         );
     }
+    NOD (x, y) {
+        if (y > x) return this.NOD(y, x);
+        if (!y) return x;
+        return this.NOD(y, x % y);
+    }
     rightAnswer() {
         this.props.openPopout(
             <Snackbar
@@ -199,8 +205,13 @@ class HomePanelTrain extends React.Component {
                 this.setState({CipherFunc: "(x+"+cons1+")%"+module+"+1"});
                 break;
             case "2":
-                let cons2=this.getRandomInt(20)+1;
+                let cons2=this.getRandomInt(20)+2;
                 let module2=this.getRandomInt(20)+33;
+                while (this.NOD(cons2,module2)!=1)
+                {
+                    cons2=this.getRandomInt(20)+1;
+                    module2=this.getRandomInt(20)+33;
+                }
                 for (let i=0;i<message.length;i++)
                     itog+=String.fromCodePoint(1072+Number((message.charCodeAt(i)-1071)*cons2)%module2);
                 this.setState({CipherFunc: "(x*"+cons2+")%"+module2+"+1"});
@@ -229,8 +240,9 @@ class HomePanelTrain extends React.Component {
        // console.log(this.state.inputData.answer.indexOf('%')!=-1);
      //  console.log(eval(this.state.inputData.answer.substr(0, this.state.inputData.answer.indexOf('x'))+this.state.Message.charCodeAt(5)+this.state.inputData.answer.substr(this.state.inputData.answer.indexOf('x') + 1, this.state.inputData.answer.length - 1)));
         for (let i=0;i<this.state.Message.length;i++) {
-                var re = /x/gi
-                let code=codeG.replace(re,(this.state.Message.charCodeAt(i) - 1071));
+                var re = /x/gi;
+                var row = /\^/gi;
+                let code=(codeG.replace(re,(this.state.Message.charCodeAt(i) - 1071))).replace(row,'**');
                 console.log(code);
                 let evres=Number(eval(code));
                 //if (evres<0)  evres=32+evres;
@@ -296,7 +308,7 @@ class HomePanelTrain extends React.Component {
                     <Div>
                     <InfoRow header="Задача">
                         Ваша задача - ввести функцю, применив которую к каждому символу, можно получить зашифрованное сообщение.
-                        В качестве "буквы" используйте <b>x</b>, а для возведения в степень <b>**</b> Пример ввода: <b>(x**2+1)%5</b>
+                        В качестве "буквы" используйте <b>x</b>, а для возведения в степень <b>^</b>. Пример ввода: <b>(x^2+11*2)%5</b>
                     </InfoRow>
                     </Div>
                 <SimpleCell>
