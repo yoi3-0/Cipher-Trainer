@@ -29,3 +29,8 @@
     text-shadow: 1px 1px 2px grey;
     text-align: center;
 }
+.tipbut{
+    margin-left: auto;
+    background: blue;
+    color: white;
+}

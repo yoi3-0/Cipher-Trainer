@@ -10,6 +10,7 @@ import {renderGroupsList} from '../../services/renderers';
 import Icon28RefreshOutline from '@vkontakte/icons/dist/28/refresh_outline';
 import Icon16Dropdown from '@vkontakte/icons/dist/16/dropdown';
 import Icon16Done from '@vkontakte/icons/dist/16/done';
+import Icon24Education from '@vkontakte/icons/dist/24/education';
 
 import bridge from '@vkontakte/vk-bridge';
 
@@ -47,6 +48,8 @@ class HomePanelTrain extends React.Component {
             Decode: "",
             StorageLevel: 0,
             alphabet: 0,
+            helptext: "",
+            allowtip: false
         };
         let DefaultLevelData = {
             level: -1,
@@ -90,6 +93,7 @@ class HomePanelTrain extends React.Component {
         this.getRandomInt = this.getRandomInt.bind(this);
         this.makeCipher=this.makeCipher.bind(this);
         this.NOD=this.NOD.bind(this);
+        this.showhelp=this.showhelp.bind(this);
     }
     toggleContext () {
         this.setState({ contextOpened: !this.state.contextOpened });
@@ -187,7 +191,7 @@ class HomePanelTrain extends React.Component {
             "инструкция", "расписание", "данные", "зеркало", "распутье", "гнездо", "йод", "скотч", "господин", "история", "деньги", "смех",
             "забота", "напиток", "вода", "жизнь", "шкатулка", "булочка", "ручка", "шапка", "лохмотья", "очередь", "крем", "уход", "гонка",
             "скорость", "реакция", "секрет", "рейтинг", "телефон", "посылка", "задумка", "идея", "исполнитель", "каникулы", "провод", "наклейка"]; //6 7 5
-        let message=text[this.getRandomInt(73)];
+        let message=text[this.getRandomInt(73)], tip;
         var itog="";
         switch(this.state.levelData.level)
         {
@@ -195,14 +199,17 @@ class HomePanelTrain extends React.Component {
                 let cons0=this.getRandomInt(13)+1;
                 for (let i=0;i<message.length;i++)
                     itog+=String.fromCodePoint(message.charCodeAt(i)+cons0);
-                this.setState({CipherFunc: "x+"+cons0});
+                tip="Здесь мы работаем с простейшим алгоритмом шифрования. Коды всех символов увеличены на "+cons0+". "+"Для расшифровки" +
+                    "достаточно просто применить обратную операцию. В данном случае просто вычесть это же число.";
+                this.setState({CipherFunc: "x+"+cons0, helptext: tip});
                 break;
             case "1":
                 let cons1=this.getRandomInt(100)+1;
                 let module=this.getRandomInt(20)+33;
                 for (let i=0;i<message.length;i++)
                     itog+=String.fromCodePoint(1072+Number((message.charCodeAt(i)-1071)+cons1)%module);
-                this.setState({CipherFunc: "(x+"+cons1+")%"+module+"+1"});
+                tip="Очень крутое пояснение решения."
+                this.setState({CipherFunc: "(x+"+cons1+")%"+module+"+1", helptext: tip});
                 break;
             case "2":
                 let cons2=this.getRandomInt(20)+2;
@@ -214,15 +221,22 @@ class HomePanelTrain extends React.Component {
                 }
                 for (let i=0;i<message.length;i++)
                     itog+=String.fromCodePoint(1072+Number((message.charCodeAt(i)-1071)*cons2)%module2);
-                this.setState({CipherFunc: "(x*"+cons2+")%"+module2+"+1"});
+                tip="Очень крутое пояснение решения."
+                this.setState({CipherFunc: "(x*"+cons2+")%"+module2+"+1", helptext: tip});
                 break;
             case "3":
                 let cons3=this.getRandomInt(10)+1;
                 let module3=this.getRandomInt(20)+33;
-                for (let i=0;i<message.length;i++) {
-                    itog += String.fromCodePoint(1072 + Number((message.charCodeAt(i)-1071) ** cons3) % module3);
+                while (this.NOD(cons3,module3)!=1)
+                {
+                    cons3=this.getRandomInt(20)+1;
+                    module3=this.getRandomInt(20)+33;
                 }
-                this.setState({CipherFunc: "(x**"+cons3+")%"+module3+"+1"});
+                for (let i=0;i<message.length;i++) {
+                    itog += String.fromCodePoint(1072 + Number((message.charCodeAt(i)-1071) ** cons3) %module3);
+                }
+                tip="Очень крутое пояснение решения."
+                this.setState({CipherFunc: "(x^"+cons3+")%"+module3+"+1", helptext: tip});
                 break;
             default: itog="Ошибка"
         }
@@ -260,6 +274,10 @@ class HomePanelTrain extends React.Component {
             this.rightAnswer();
         }
         else this.setState({Decode:decoded, showDecode: true, color: "red"});
+    }
+    showhelp()
+    {
+        this.setState({allowtip: true});
     }
     render() {
         const {id, setPage, goBack} = this.props;
@@ -301,10 +319,14 @@ class HomePanelTrain extends React.Component {
                     {this.state.showDecode &&
                     <SimpleCell style={{background: this.state.color}}>
                         <InfoRow header="Сообщение после применения функции:">
+                            <div style={{display: "flex"}}>
                             <b>{this.state.Decode}</b>
+                            <Button className='tipbut' mode="secondary" before={<Icon24Education/>} onClick={this.showhelp}>Помощь с решением</Button>
+                            </div>
                         </InfoRow>
                     </SimpleCell>
                     }
+                    {this.state.allowtip && <Div> {this.state.helptext}</Div>}
                     <Div>
                     <InfoRow header="Задача">
                         Ваша задача - ввести функцю, применив которую к каждому символу, можно получить зашифрованное сообщение.
