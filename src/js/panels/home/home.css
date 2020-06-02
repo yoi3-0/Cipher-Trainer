@@ -37,8 +37,26 @@
     background: linear-gradient(green,white) fixed;
     color: black;
 }
+.choicebutt{
+    text-align: center;
+    font-size: xx-large;
+    width: auto;
+    text-decoration: none;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 0);
+    background: #5f6b9f;
+    color: #dbe0f8;
+    padding: .3em 1em;
+    border: 1px solid #aaa;
+    border-radius: 100px;
+    outline: none;
+}
 .divbutt{
    display: flex;
+}
+.buttons-group{
+    alignment: center;
 }
 .appName
 {
@@ -139,7 +157,7 @@ margin-left: auto;
     vertical-align: middle;
     background-color: #bbc5ef;
     font-family: Computer;
-    color: white;
+    color: #475282;
     font-size: xx-large;
 }
 .tabbutt{

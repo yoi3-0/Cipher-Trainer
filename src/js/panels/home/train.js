@@ -97,7 +97,7 @@ class HomePanelTrain extends React.Component {
                 </Div>
                 <Group className='selects'>
                     <FormLayout>
-                        <FormLayoutGroup >
+                        <FormLayoutGroup style={{ marginRight: 'auto', marginLeft:'auto', width: '50%' }}>
                             <Select placeholder="Выберите уровень сложности"
                                     onChange={this.handleInput}
                                     name="level"
@@ -118,10 +118,7 @@ class HomePanelTrain extends React.Component {
                             </Select>
                         </FormLayoutGroup>
                     </FormLayout>
-                    <Div className="buttons-group">
-                        <Button size="l"  className="startbutt"  onClick={this.clearForm}>Очистить</Button>
-                        <Button size="l" className="startbutt"  onClick={() => this.commitTrain()}>Перейти к выполнению</Button>
-                    </Div>
+                    <Button size="l" className="choicebutt"  onClick={() => this.commitTrain()}><b style={{font_size: 'xx-large'}}>Начать</b></Button>
                 </Group>
             </Panel>
         );
