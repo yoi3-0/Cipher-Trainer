@@ -1,16 +1,16 @@
 {
-  "main.css": "/Cipher-Trainer/static/css/main.1664f749.chunk.css",
-  "main.js": "/Cipher-Trainer/static/js/main.510fa0da.chunk.js",
-  "main.js.map": "/Cipher-Trainer/static/js/main.510fa0da.chunk.js.map",
+  "main.css": "/Cipher-Trainer/static/css/main.1b075a9c.chunk.css",
+  "main.js": "/Cipher-Trainer/static/js/main.ad8bffc4.chunk.js",
+  "main.js.map": "/Cipher-Trainer/static/js/main.ad8bffc4.chunk.js.map",
   "runtime~main.js": "/Cipher-Trainer/static/js/runtime~main.e2da6144.js",
   "runtime~main.js.map": "/Cipher-Trainer/static/js/runtime~main.e2da6144.js.map",
   "static/css/2.bd12921c.chunk.css": "/Cipher-Trainer/static/css/2.bd12921c.chunk.css",
-  "static/js/2.ee7a9012.chunk.js": "/Cipher-Trainer/static/js/2.ee7a9012.chunk.js",
-  "static/js/2.ee7a9012.chunk.js.map": "/Cipher-Trainer/static/js/2.ee7a9012.chunk.js.map",
+  "static/js/2.440751b0.chunk.js": "/Cipher-Trainer/static/js/2.440751b0.chunk.js",
+  "static/js/2.440751b0.chunk.js.map": "/Cipher-Trainer/static/js/2.440751b0.chunk.js.map",
   "index.html": "/Cipher-Trainer/index.html",
-  "precache-manifest.d2a3754afb4ab41d56826cf0f6566f4c.js": "/Cipher-Trainer/precache-manifest.d2a3754afb4ab41d56826cf0f6566f4c.js",
+  "precache-manifest.e4097186263bc25a53413e8d467a9724.js": "/Cipher-Trainer/precache-manifest.e4097186263bc25a53413e8d467a9724.js",
   "service-worker.js": "/Cipher-Trainer/service-worker.js",
   "static/css/2.bd12921c.chunk.css.map": "/Cipher-Trainer/static/css/2.bd12921c.chunk.css.map",
-  "static/css/main.1664f749.chunk.css.map": "/Cipher-Trainer/static/css/main.1664f749.chunk.css.map",
-  "static/media/home.css": "/Cipher-Trainer/static/media/fon.a0c5959f.png"
+  "static/css/main.1b075a9c.chunk.css.map": "/Cipher-Trainer/static/css/main.1b075a9c.chunk.css.map",
+  "static/media/home.css": "/Cipher-Trainer/static/media/train_fon.77e24468.png"
 }
