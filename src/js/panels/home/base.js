@@ -9,6 +9,7 @@ import Icon24Filter from '@vkontakte/icons/dist/24/filter';
 
 import './home.css';
 
+
 class HomePanelBase extends React.Component {
 
     state = {
@@ -43,23 +44,26 @@ class HomePanelBase extends React.Component {
         const {id, setPage, withoutEpic} = this.props;
 
         return (
-            <Panel id={id}>
-                <PanelHeader>Главная</PanelHeader>
+
+            <Panel id={id} className="PanelBase">
+                <div className='alignmentDiv'>
                 <Div>
-                    <Text weight="medium" className='textstart'>Добро пожаловать в математический тренажёр!<br/>
-                    Данное мини-приложение позволяет потренироваться в расшифровке текстов, зашифрованных различными алгоритмами шифрования.
+                    <h1 className='appName'>МАТЕМАТИЧЕСКИЙ ТРЕНАЖЁР</h1>
+                    <Text weight="medium" className='textstart'>
+                        Тренировка в расшифровке текстов, зашифрованных различными алгоритмами шифрования
                     </Text>
                 </Div>
                 <Group>
                     <Div className="divbutt">
                         <Button mode="secondary" size="l"  className="startbutt"  onClick={() => setPage('home', 'train')}>Начать</Button>
 
-                        <Button mode="secondary" size="l"  className="startbutt2"  onClick={() => setPage('home', 'education')}>Обучение</Button>
+                        <Button mode="secondary" size="l"  className="startbutt"  onClick={() => setPage('home', 'education')}>Обучение</Button>
                     </Div>
                     {this.state.showImg && <Div className="div-center">
                         <img src="https://vk.com/sticker/1-12676-256" alt="Стикер VK"/>
                     </Div>}
                 </Group>
+                </div>
             </Panel>
         );
     }

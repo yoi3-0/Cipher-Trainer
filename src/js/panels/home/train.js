@@ -6,6 +6,7 @@ import {goBack, openPopout, closePopout, openModal, setPage} from "../../store/r
 import * as VK from '../../services/VK';
 
 import {renderGroupsList} from '../../services/renderers';
+import Icon24BrowserBack from '@vkontakte/icons/dist/24/browser_back';
 
 import {
     Div,
@@ -87,20 +88,20 @@ class HomePanelTrain extends React.Component {
         const {id, setPage, goBack} = this.props;
 
         return (
-            <Panel id={id}>
-                <PanelHeader
-                    left={<PanelHeaderBack onClick={() => goBack()}/>}
-                >
-                   Выбор упражнения
-                </PanelHeader>
-                <Div>
+            <Panel id={id} className='choice_one'>
+                <Div className='headercontent'>
+                    <Button mode="tertiary" size="l" before={<Icon24BrowserBack/>} onClick={() => goBack()} className='backButt'>
+                        <h3>Главная</h3>
+                    </Button>
+                    <h2 className='headertext'> Выбор упражнения</h2>
                 </Div>
-                <Group>
+                <Group className='selects'>
                     <FormLayout>
-                        <FormLayoutGroup top="Уровень сложности">
-                            <Select placeholder="Выберите уровень"
+                        <FormLayoutGroup >
+                            <Select placeholder="Выберите уровень сложности"
                                     onChange={this.handleInput}
                                     name="level"
+                                    className='select'
                                     value={this.state.inputData.level}
                             >
                                 <option value="0" title={"Простешее упражнение для знакомства с интерфейсом"}>Тренировка</option>
@@ -118,8 +119,8 @@ class HomePanelTrain extends React.Component {
                         </FormLayoutGroup>
                     </FormLayout>
                     <Div className="buttons-group">
-                        <Button size="l" stretched={true} onClick={() => this.commitTrain()}>Перейти к выполнению</Button>
-                        <Button size="l" stretched={true} onClick={this.clearForm}>Очистить</Button>
+                        <Button size="l"  className="startbutt"  onClick={this.clearForm}>Очистить</Button>
+                        <Button size="l" className="startbutt"  onClick={() => this.commitTrain()}>Перейти к выполнению</Button>
                     </Div>
                 </Group>
             </Panel>

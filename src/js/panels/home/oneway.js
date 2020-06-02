@@ -11,6 +11,7 @@ import Icon28RefreshOutline from '@vkontakte/icons/dist/28/refresh_outline';
 import Icon16Dropdown from '@vkontakte/icons/dist/16/dropdown';
 import Icon16Done from '@vkontakte/icons/dist/16/done';
 import Icon24Education from '@vkontakte/icons/dist/24/education';
+import Icon24BrowserBack from '@vkontakte/icons/dist/24/browser_back';
 
 import bridge from '@vkontakte/vk-bridge';
 
@@ -100,14 +101,23 @@ class HomePanelTrain extends React.Component {
     }
 
     componentDidMount() {
-        let trainType;
+        let trainType, levelType;
         switch(this.state.levelData.type)
         {
             case "1": trainType='"Обратные" функции'; break;
             default: trainType="Ошибка"; break;
         }
+        switch(this.state.levelData.level)
+        {
+            case "0": levelType='Тренировка'; break;
+            case "1": levelType='Легкий уровень'; break;
+            case "2": levelType='Средний уровень'; break;
+            case "3": levelType='Тяжёлый уровень'; break;
+            default: levelType="Ошибка"; break;
+        }
         this.setState({
             trainType: trainType,
+            levelType: levelType,
             itog: "",
             numberOfDone: 0,
         });
@@ -199,7 +209,7 @@ class HomePanelTrain extends React.Component {
                 let cons0=this.getRandomInt(13)+1;
                 for (let i=0;i<message.length;i++)
                     itog+=String.fromCodePoint(message.charCodeAt(i)+cons0);
-                tip="Здесь мы работаем с простейшим алгоритмом шифрования. Коды всех символов увеличены на "+cons0+". "+"Для расшифровки" +
+                tip="Здесь мы работаем с простейшим алгоритмом шифрования. Коды всех символов увеличены на "+cons0+". "+"Для расшифровки " +
                     "достаточно просто применить обратную операцию. В данном случае просто вычесть это же число.";
                 this.setState({CipherFunc: "x+"+cons0, helptext: tip});
                 break;
@@ -283,75 +293,76 @@ class HomePanelTrain extends React.Component {
         const {id, setPage, goBack} = this.props;
 
         return (
-            <Panel id={id}>
-                <PanelHeader
-                    left={<PanelHeaderBack onClick={() => this.confirmExit()}/>}
-                >
-                    <PanelHeaderContent
-                        aside={<Icon16Dropdown style={{ transform: `rotate(${this.state.contextOpened ? '180deg' : '0'})` }} />}
-                        onClick={this.toggleContext}
-                    >
-                    {this.state.trainType}
-                    </PanelHeaderContent>
-                </PanelHeader>
-                <PanelHeaderContext  opened={this.state.contextOpened} onClose={this.toggleContext}>
-                    <List>
-                        <Cell
-                            before={<Icon28RefreshOutline />}
-                            onClick={this.makeCipher}
-                            data-mode="all"
-                        >
-                            Обновить задачу
-                        </Cell>
-                        <Cell
-                            data-mode="rightAns"
-                        >
-                            Количество верных ответов: {this.state.numberOfDone}
-                        </Cell>
-                    </List>
-                </PanelHeaderContext>
+            <Panel id={id} className='train_one'>
+                    <Div className='headercontent'>
+                        <Button mode="tertiary" size="l" before={<Icon24BrowserBack/>} onClick={() => this.confirmExit()} className='backButt'>
+                            <h3>Назад</h3>
+                        </Button>
+                        <h2 className='headerH'> <b className='headertext'>{this.state.trainType} </b>
+                            <br/>                           <b className='traintype'> {this.state.levelType} </b></h2>
+                        <List className='headerbut'>
+                            <Cell
+                                before={<Icon28RefreshOutline style={{color:'white'}}/>}
+                                onClick={this.makeCipher}
+                                data-mode="all"
+                            >
+                                <b className='refreshbut'>Обновить задачу </b>
+                            </Cell>
+                            <Cell
+                                data-mode="rightAns"
+                            >
+                                <b className='refreshbut'> Верных ответов: {this.state.numberOfDone}</b>
+                            </Cell>
+                        </List>
+                    </Div>
                 <Group>
-                    <SimpleCell>
-                    <InfoRow header="Зашифрованное сообщение:">
-                         <b>{this.state.Message}</b>
-                    </InfoRow>
-                    </SimpleCell>
+                    <div style={{display:'flex'}}>
+                        <SimpleCell>
+                            <InfoRow>
+                                <b className='Mosttext'>Зашифрованное сообщение:</b>
+                                <div className='desctext'>
+                                    {this.state.Message}
+                                </div>
+                            </InfoRow>
+                        </SimpleCell>
                     {this.state.showDecode &&
-                    <SimpleCell style={{background: this.state.color}}>
-                        <InfoRow header="Сообщение после применения функции:">
+                    <SimpleCell>
+                        <InfoRow>
+                            <b className='Mosttext'>Сообщение после функции:</b>
                             <div style={{display: "flex"}}>
+                            <div  style={{background: this.state.color}} className='desctext'>
                             <b>{this.state.Decode}</b>
-                            <Button className='tipbut' mode="secondary" before={<Icon24Education/>} onClick={this.showhelp}>Помощь с решением</Button>
+                            </div>
+                            <Button className='tipbut' mode="secondary" before={<Icon24Education style={{color:'#dbe0f8'}}/>} onClick={this.showhelp}>Помощь</Button>
                             </div>
                         </InfoRow>
                     </SimpleCell>
                     }
+                    </div>
                     {this.state.allowtip && <Div> {this.state.helptext}</Div>}
                     <Div>
-                    <InfoRow header="Задача">
+                        <b className='Mosttext'>Задача:</b>
+                    <InfoRow className='desctext'>
                         Ваша задача - ввести функцю, применив которую к каждому символу, можно получить зашифрованное сообщение.
-                        В качестве "буквы" используйте <b>x</b>, а для возведения в степень <b>^</b>. Пример ввода: <b>(x^2+11*2)%5</b>
+                            В качестве "буквы" используйте <b>x</b>, а для возведения в степень <b>^</b>. Пример ввода: <b>(x^2+11*2)%5</b>
                     </InfoRow>
                     </Div>
-                <SimpleCell>
-                    <InfoRow header="Функция по которой шифровали:">
-                        <b>{this.state.CipherFunc} </b>
-                    </InfoRow>
-                </SimpleCell>
+                    <Div>
+                        <b className='Mosttext'>Функция по которой шифровали:</b>
+                        <InfoRow className='desctext'>
+                            {this.state.CipherFunc}
+                        </InfoRow>
+                    </Div>
                 </Group>
-                <Group>
-                <Div>
+                <Div style={{display:'flex'}}>
                     <Input value={this.state.inputData.answer}
                            pattern="[+]7\s[\(]\d{3}[\)]\s\d{3}[\-]\d{2}[\-]\d{2}"
                            onChange={this.handleInput}
                            name="answer"
                            placeholder="Ваш ответ"
                            autoComplete="off"/>
-                </Div>
-                    <Div>
-                    <Button size="l" stretched={true} onClick={this.confirmInput}>Применить функцию</Button>
+                    <Button size="l" className="startbutt"  onClick={this.confirmInput}>Применить функцию</Button>
                     </Div>
-                </Group>
             </Panel>
         );
     }

@@ -1,14 +1,30 @@
-
+@font-face {
+    font-family: Russo; /* Гарнитура шрифта */
+    src: url(../../../fonts/Russo.ttf); /* Путь к файлу со шрифтом */
+}
+@font-face {
+    font-family: Computer;
+    src: url(../../../fonts/computer.ttf);
+}
+@font-face {
+    font-family: OpenSans;
+    src: url(../../../fonts/OpenSans.ttf);
+}
 .startbutt{
     text-align: center;
     text-decoration: none;
-    font-size: 16px;
     margin:0 auto;
-    padding: 50px;
-    position: center;
-    border-radius: 500%;
-    background: linear-gradient(blue,white) fixed;
-    color: black;
+    width: 30%;
+    background: #5f6b9f;
+    color: #dbe0f8;
+    display: inline-block;
+    padding: .3em 1em;
+    border: 1px solid #aaa;
+    border-radius: 100px;
+    outline: none;
+    background-position: calc(100% - 2.7em) 0, calc(100% - 2.7em + 1px) 0, 0 0;
+    background-size: 1px 100%, 1px 100%, auto auto;
+    overflow: hidden;
 }
 .startbutt2{
     text-align: center;
@@ -24,13 +40,131 @@
 .divbutt{
    display: flex;
 }
-
-.textstart{
-    text-shadow: 1px 1px 2px grey;
+.appName
+{
     text-align: center;
+    alignment: center;
+    font-size: 45pt;
+    color: #141f50;
+    font-family: Russo;
+}
+.headertext{
+    font-size: 20pt;
+    color: #141f50;
+    font-family: Russo;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+.backButt{
+    color: #141f50;
+}
+.select{
+    color: #c7d0f8 !important;
+    background-color: #c7d0f8 !important;
+    background: #c7d0f8 !important;
+}
+.headercontent{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.alignmentDiv{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    transform: translate(-50%, -50%);
+}
+.selects{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    transform: translate(-50%, -50%);
+}
+.textstart{
+    font-size: 30pt;
+    text-align: center;
+    color: #000000;
+    font-family: Computer;
 }
 .tipbut{
     margin-left: auto;
-    background: blue;
+    background: #5f6b9f;
     color: white;
+}
+.PanelBase .Panel__in{
+    background-image: url(fon.png) !important;
+    background-position: center;
+}
+.choice_one .Panel__in{
+    background-image: url(choice_fon.png) !important;
+    background-position: center;
+}
+.train_one .Panel__in{
+    background-image: url(train_fon.png) !important;
+    background-position: center;
+    padding-bottom: 0;
+}
+.edu_one .Panel__in{
+    background-image: url(edu_fon.png) !important;
+    background-position: center;
+}
+.headerbut{
+    margin-left: auto;
+}
+.traintype{
+    color: #5f6b9f;
+    font-family: Computer;
+}
+.headerH {
+margin-left: auto;
+    padding-left: auto;
+}
+.refreshbut{
+    font-family: Computer;
+    color: white;
+    font-size: xx-large;
+}
+.Mosttext{
+    font-family: Computer;
+    font-size: xx-large;
+    margin-bottom: auto;
+}
+.desctext{
+    padding: 5px 5px 5px 5px;
+    border-radius: 10px;
+    margin-bottom: 5px;
+    vertical-align: middle;
+    background-color: #bbc5ef;
+    font-family: Computer;
+    color: white;
+    font-size: xx-large;
+}
+.tabbutt{
+    text-align: center;
+    text-decoration: none;
+    margin-left: 10%;
+    margin-right: 10%;
+    background: #5f6b9f;
+    color: #dbe0f8;
+    display: inline-block;
+    padding: .3em 1em;
+    border: 1px solid #aaa;
+    border-radius: 100px;
+    outline: none;
+    background-position: calc(100% - 2.7em) 0, calc(100% - 2.7em + 1px) 0, 0 0;
+    background-size: 1px 100%, 1px 100%, auto auto;
+    overflow: hidden;
+}
+.tabsdiv{
+    background: rgba(205, 214, 219, 0);
+}
+.edutext{
+font-family: OpenSans;
+}
+.headerEdu{
+    font-family: Computer !important;
+    font-size: xx-large;
 }

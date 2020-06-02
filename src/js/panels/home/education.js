@@ -14,9 +14,10 @@ import {
     FixedLayout,
     HorizontalScroll,
     TabsItem,
-    Tabs, PanelHeaderBack
+    Tabs, PanelHeaderBack, Button
 } from "@vkontakte/vkui";
 import {setFormData} from "../../store/formData/actions";
+import Icon24BrowserBack from '@vkontakte/icons/dist/24/browser_back';
 
 class HomePanelProfile extends React.Component {
 
@@ -48,23 +49,25 @@ class HomePanelProfile extends React.Component {
         const boxStyle = {marginTop: 56};
 
         return (
-            <Panel id={id}>
-                <PanelHeader
-                    left={<PanelHeaderBack onClick={() => goBack()}/>}
-                >
-                    Обучение
-                </PanelHeader>
-                <FixedLayout vertical="top">
-                    <Tabs theme="header" mode="default">
+            <Panel id={id} className='edu_one'>
+                <Div className='headercontent'>
+                    <Button mode="tertiary" size="l" before={<Icon24BrowserBack/>} onClick={() => goBack()} className='backButt'>
+                        <h3>Главная</h3>
+                    </Button>
+                    <h2 className='headertext'> Обучение</h2>
+                </Div >
+                    <Tabs theme="header" mode="default" className="tabsdiv">
                         <HorizontalScroll id="EXAMPLE_TABS_LIST">
 
                             <TabsItem
+                                className='tabbutt'
                                 onClick={() => this.setTab('ui')}
                                 selected={this.state.activeTab === 'ui'}
                             >
                                 Интерфейс
                             </TabsItem>
                             <TabsItem
+                                className='tabbutt'
                                 onClick={() => this.setTab('methods')}
                                 selected={this.state.activeTab === 'methods'}
                             >
@@ -72,20 +75,19 @@ class HomePanelProfile extends React.Component {
                             </TabsItem>
                         </HorizontalScroll>
                     </Tabs>
-                </FixedLayout>
                 <Group style={boxStyle}>
-                    {this.state.activeTab === 'methods' && <Div>
+                    {this.state.activeTab === 'methods' && <Div className='edutext'>
                         Здесь расписаны некоторые способы решения задач<br/>
-                        <h3>Вступление</h3>
+                        <h3 className='headerEdu'>Вступление</h3>
                         Существует несколько оговорок, о которых следует знать для более продуктивной работы с тренажёром.<br/>
                         Во-первых, алфавит начинается с 1 (а) и заканчивается буквой с номером 32 (я). Используется алфавит без буквы "ё".<br/>
                         Во-вторых, для более интересного взаимодействия, в случае выхода за границы диапазона 1-32, будут использоваться символы, которые стоят
                         по соответствующую сторону от русских букв в таблице HTML-кодов символов.
-                        <h3>Тренировка</h3>
+                        <h3 className='headerEdu'>Тренировка</h3>
                         Тренировка - простейший уровень упражнения. Шифр заключается в простом сдвиге номера буквы в алфавите на некоторое число.
                         <br/>Метод решения такой задачи до смешного тривиальный: требуется применить обратный сдвиг. Например, в случае прибавления числа к номеру буквы -
                         вычесть то же число из полученного результата (шифра).
-                        <h3>Легкий уровень</h3>
+                        <h3 className='headerEdu'>Легкий уровень</h3>
                         Задачи этого и последующих уровней более сложные, так как используют операцию взятия по модулю. Однако и эту задачу можно решить.<br/>
                         Рассмотрим на примере: <br/>
                         <p>
@@ -102,14 +104,14 @@ class HomePanelProfile extends React.Component {
                         (а в данном случае мы получаем отрицательное число для всех x&#60;13) даёт результатом отрицательное число, чтобы этого избежать, воспользуемся формулой&nbsp;
                         <b>a%b=(b+a%b)%b</b>, справа будет всегда стоять положительное число или ноль.
                     </Div>}
-                    {this.state.activeTab === 'ui' && <Div>
+                    {this.state.activeTab === 'ui' && <Div className='edutext'>
                         Для перехода к занятию нажмите кнопку "Начать" на начальной странице приложения.<br/>
-                        <h3>Настройка занятия</h3>
+                        <h3 className='headerEdu'>Настройка занятия</h3>
                         На следующей странице будет предложено выбрать сложность и упражнение. Сейчас доступно только одно упражнение -
                         "обратные" функции. Выбор уровня сложности влияет на сложность нахождения обратной функции к той, по которой шифровался текст.
                         Вы можете вызвать подсказку, наведя указатель на уровень сложности и подождав секунду.
                         <br/>После выбора уровня и упражнения нажмите на кнопку перехода к выполнению.<br/>
-                        <h3>Страница упражнения</h3>
+                        <h3 className='headerEdu'>Страница упражнения</h3>
                         Вверху открывшейся страницы будет представлен текст, получившийся применением функции шифрования, которая отображается над полем ввода.
                         Ваша задача - вычислить функцию, применив которую к каждой букве зашифрованного сообщения, можно получить сообщение. В качестве
                         сообщений выступают имена существительные.<br/>
@@ -118,7 +120,7 @@ class HomePanelProfile extends React.Component {
                         В случае ввода правильного ответа вы увидите соответствующее сообщение внизу экрана, а также зашифрованное слово, при этом будет
                         автоматически сгенерирована следующая задача.
                         Если ответ оказался неправильным, то под зашифрованным словом отобразится результат применения функции, подсвеченный красным.
-                        <h3>Дополнительные возможности</h3>
+                        <h3 className='headerEdu'>Дополнительные возможности</h3>
                         Вы можете вызвать выпадающий список нажатием на заголовок страницы.
                         В появившемся окне можно заменить задание на новое, а также посмотреть количество правильно решенных задач.
                     </Div>}
