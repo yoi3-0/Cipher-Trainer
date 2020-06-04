@@ -104,7 +104,7 @@ class HomePanelTrain extends React.Component {
         let trainType, levelType;
         switch(this.state.levelData.type)
         {
-            case "1": trainType='"Обратные" функции'; break;
+            case "1": trainType='Обратные функции'; break;
             default: trainType="Ошибка"; break;
         }
         switch(this.state.levelData.level)
@@ -298,11 +298,11 @@ class HomePanelTrain extends React.Component {
                         <Button mode="tertiary" size="l" before={<Icon24BrowserBack/>} onClick={() => this.confirmExit()} className='backButt'>
                             <h3>Назад</h3>
                         </Button>
-                        <h2 className='headerH'> <b className='headertext'>{this.state.trainType} </b>
+                        <h2 className='headerH'> <b className='headerOneH'>{this.state.trainType} </b>
                             <br/>                           <b className='traintype'> {this.state.levelType} </b></h2>
                         <List className='headerbut'>
                             <Cell
-                                before={<Icon28RefreshOutline style={{color:'white'}}/>}
+                                before={<Icon28RefreshOutline width={20} height={20} style={{color:'white'}}/>}
                                 onClick={this.makeCipher}
                                 data-mode="all"
                             >
@@ -348,7 +348,7 @@ class HomePanelTrain extends React.Component {
                     </InfoRow>
                     </Div>
                     <Div>
-                        <b className='Mosttext'>Функция по которой шифровали:</b>
+                        <b className='Mosttext'>Функция, по которой шифровали:</b>
                         <InfoRow className='desctext'>
                             {this.state.CipherFunc}
                         </InfoRow>
@@ -356,7 +356,7 @@ class HomePanelTrain extends React.Component {
                 </Group>
                 <Div style={{display:'flex'}}>
                     <Input value={this.state.inputData.answer}
-                           pattern="[+]7\s[\(]\d{3}[\)]\s\d{3}[\-]\d{2}[\-]\d{2}"
+                           type="text" with pattern="[0-9]*"
                            onChange={this.handleInput}
                            name="answer"
                            placeholder="Ваш ответ"

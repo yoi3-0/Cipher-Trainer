@@ -79,7 +79,7 @@ class App extends React.Component {
         );
 
         return (
-            <ConfigProvider isWebView={true} scheme={colorScheme}>
+            <ConfigProvider scheme={colorScheme}>
                     <Root id="home" activeView={activeView} popout={popout}>
                         <View
                             id="home"

@@ -70,8 +70,25 @@
     font-size: 20pt;
     color: #141f50;
     font-family: Russo;
-    margin-left: auto;
-    margin-right: auto;
+    position: absolute;
+    left: 50%;
+    -webkit-transform: translate(-50%);
+    -moz-transform: translate(-50%);
+    -ms-transform: translate(-50%);
+    -o-transform: translate(-50%);
+    transform: translate(-50%);
+
+}
+.headerOneH{
+    font-size: 20pt;
+    color: #141f50;
+    font-family: Russo;
+    left: 50%;
+    -webkit-transform: translate(-50%);
+    -moz-transform: translate(-50%);
+    -ms-transform: translate(-50%);
+    -o-transform: translate(-50%);
+    transform: translate(-50%);
 
 }
 .backButt{
@@ -84,8 +101,16 @@
 }
 .headercontent{
     display: flex;
-    align-items: center;
-    justify-content: center;
+    position: relative;
+}
+.headerH {
+    position: absolute;
+    left: 50%;
+    -webkit-transform: translate(-50%);
+    -moz-transform: translate(-50%);
+    -ms-transform: translate(-50%);
+    -o-transform: translate(-50%);
+    transform: translate(-50%);
 }
 .alignmentDiv{
     position: absolute;
@@ -131,19 +156,23 @@
 }
 .headerbut{
     margin-left: auto;
+    size: auto;
 }
 .traintype{
+
     color: #5f6b9f;
     font-family: Computer;
+    left: 50%;
+    -webkit-transform: translate(-50%);
+    -moz-transform: translate(-50%);
+    -ms-transform: translate(-50%);
+    -o-transform: translate(-50%);
+    transform: translate(-50%);
 }
-.headerH {
-margin-left: auto;
-    padding-left: auto;
-}
-.refreshbut{
-    font-family: Computer;
+.refreshbut {
+    font-family: "Open Sans";
     color: white;
-    font-size: xx-large;
+    font-size: 2vw;
 }
 .Mosttext{
     font-family: Computer;
@@ -156,9 +185,9 @@ margin-left: auto;
     margin-bottom: 5px;
     vertical-align: middle;
     background-color: #bbc5ef;
-    font-family: Computer;
+    font-family: "Open Sans";
     color: #475282;
-    font-size: xx-large;
+    font-size: large;
 }
 .tabbutt{
     text-align: center;
@@ -166,7 +195,6 @@ margin-left: auto;
     margin-left: 10%;
     margin-right: 10%;
     background: #5f6b9f;
-    color: #dbe0f8;
     display: inline-block;
     padding: .3em 1em;
     border: 1px solid #aaa;
@@ -175,6 +203,12 @@ margin-left: auto;
     background-position: calc(100% - 2.7em) 0, calc(100% - 2.7em + 1px) 0, 0 0;
     background-size: 1px 100%, 1px 100%, auto auto;
     overflow: hidden;
+}
+.tabbutt.TabsItem--selected{
+    color: white !important;
+}
+.tabbutt.TabsItem{
+    color: #c7d0f8;
 }
 .tabsdiv{
     background: rgba(205, 214, 219, 0);
