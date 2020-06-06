@@ -4,8 +4,8 @@ self.__precacheManifest = [
     "url": "/Cipher-Trainer/static/media/train_fon.77e24468.png"
   },
   {
-    "revision": "2148d1796a76c7579f87",
-    "url": "/Cipher-Trainer/static/css/main.a5dabd5b.chunk.css"
+    "revision": "16681fcaaf0a3c2a4e40",
+    "url": "/Cipher-Trainer/static/css/main.24389b26.chunk.css"
   },
   {
     "revision": "e96a758c18cecd5df506",
@@ -16,16 +16,16 @@ self.__precacheManifest = [
     "url": "/Cipher-Trainer/static/media/computer.f439abec.ttf"
   },
   {
-    "revision": "76c1b13c1156347b2061",
-    "url": "/Cipher-Trainer/static/js/2.f5098302.chunk.js"
+    "revision": "9e04b27bb496274b4502",
+    "url": "/Cipher-Trainer/static/js/2.717eac7d.chunk.js"
   },
   {
     "revision": "a2af05cb536082e362685b692fc129e7",
     "url": "/Cipher-Trainer/static/media/edu_fon.a2af05cb.png"
   },
   {
-    "revision": "2148d1796a76c7579f87",
-    "url": "/Cipher-Trainer/static/js/main.04ad8f80.chunk.js"
+    "revision": "16681fcaaf0a3c2a4e40",
+    "url": "/Cipher-Trainer/static/js/main.ddea6d25.chunk.js"
   },
   {
     "revision": "a0c5959febaf18cdbd70277ae18a6a97",
@@ -44,11 +44,11 @@ self.__precacheManifest = [
     "url": "/Cipher-Trainer/static/media/OpenSans.629a55a7.ttf"
   },
   {
-    "revision": "76c1b13c1156347b2061",
+    "revision": "9e04b27bb496274b4502",
     "url": "/Cipher-Trainer/static/css/2.bd12921c.chunk.css"
   },
   {
-    "revision": "0080f5d03d58e4defdc5f651b692e9a5",
+    "revision": "81b1f7472885754f5cf080ce0959986b",
     "url": "/Cipher-Trainer/index.html"
   }
 ];
