@@ -69,7 +69,7 @@
 .headertext{
     font-size: 20pt;
     color: #141f50;
-    font-family: Russo;
+    font-family: OpenSans;
     position: absolute;
     left: 50%;
     -webkit-transform: translate(-50%);
@@ -82,7 +82,7 @@
 .headerOneH{
     font-size: 20pt;
     color: #141f50;
-    font-family: Russo;
+    font-family: OpenSans;
     left: 50%;
     -webkit-transform: translate(-50%);
     -moz-transform: translate(-50%);
@@ -92,6 +92,7 @@
 
 }
 .backButt{
+    font-family: OpenSans;
     color: #141f50;
 }
 .select{
@@ -134,6 +135,7 @@
 }
 .tipbut{
     margin-left: auto;
+    margin-right: auto;
     background: #5f6b9f;
     color: white;
 }
@@ -155,13 +157,16 @@
     background-position: center;
 }
 .headerbut{
-    margin-left: auto;
-    size: auto;
+    position: absolute; /* блок занимает ширину содержимого, max-width её ограничивает */
+    right: 0;
+    top: 60%;
+
+    transform: translateY(-50%);
 }
 .traintype{
-
+    font-size: large;
     color: #5f6b9f;
-    font-family: Computer;
+    font-family: OpenSans;
     left: 50%;
     -webkit-transform: translate(-50%);
     -moz-transform: translate(-50%);
@@ -170,9 +175,8 @@
     transform: translate(-50%);
 }
 .refreshbut {
-    font-family: "Open Sans";
-    color: white;
-    font-size: 2vw;
+    font-family: OpenSans;
+    color: #141f50;
 }
 .Mosttext{
     font-family: Computer;
@@ -185,7 +189,7 @@
     margin-bottom: 5px;
     vertical-align: middle;
     background-color: #bbc5ef;
-    font-family: "Open Sans";
+    font-family: OpenSans;
     color: #475282;
     font-size: large;
 }
@@ -214,7 +218,7 @@
     background: rgba(205, 214, 219, 0);
 }
 .edutext{
-font-family: OpenSans;
+    font-family: OpenSans;
 }
 .headerEdu{
     font-family: Computer !important;

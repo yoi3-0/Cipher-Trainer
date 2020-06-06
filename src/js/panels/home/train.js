@@ -21,6 +21,7 @@ import {
     FormLayout, FormLayoutGroup, Input, Checkbox, Alert
 } from "@vkontakte/vkui";
 import {setFormData} from "../../store/formData/actions";
+import IS_WEB from '@vkontakte/vk-bridge';
 
 class HomePanelTrain extends React.Component {
 
@@ -91,13 +92,13 @@ class HomePanelTrain extends React.Component {
             <Panel id={id} className='choice_one'>
                 <Div className='headercontent'>
                     <Button mode="tertiary" size="l" before={<Icon24BrowserBack/>} onClick={() => goBack()} className='backButt'>
-                        <h3>Главная</h3>
+                        <h3>&nbsp;</h3>
                     </Button>
-                    <h2 className='headertext'> Выбор упражнения</h2>
+                    <h2 className='headertext'> Настройка</h2>
                 </Div>
                 <Group className='selects'>
                     <FormLayout>
-                        <FormLayoutGroup style={{ marginRight: 'auto', marginLeft:'auto', width: '50%' }}>
+                        <FormLayoutGroup style={{ marginRight: 'auto', marginLeft:'auto', width: '70%' }}>
                             <Select placeholder="Выберите уровень сложности"
                                     onChange={this.handleInput}
                                     name="level"

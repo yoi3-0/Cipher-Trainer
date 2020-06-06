@@ -50,7 +50,7 @@ class HomePanelTrain extends React.Component {
             StorageLevel: 0,
             alphabet: 0,
             helptext: "",
-            allowtip: false
+            allowtip: false,
         };
         let DefaultLevelData = {
             level: -1,
@@ -65,7 +65,6 @@ class HomePanelTrain extends React.Component {
             inputData: DefaultInputlData,
             disallowText: false,
         };
-
         this.handleInput = (e) => {
             let value = e.currentTarget.value;
 
@@ -287,7 +286,7 @@ class HomePanelTrain extends React.Component {
     }
     showhelp()
     {
-        this.setState({allowtip: true});
+        this.setState({allowtip: !this.state.allowtip});
     }
     render() {
         const {id, setPage, goBack} = this.props;
@@ -296,27 +295,22 @@ class HomePanelTrain extends React.Component {
             <Panel id={id} className='train_one'>
                     <Div className='headercontent'>
                         <Button mode="tertiary" size="l" before={<Icon24BrowserBack/>} onClick={() => this.confirmExit()} className='backButt'>
-                            <h3>Назад</h3>
+                            <h2> &nbsp; </h2>
                         </Button>
                         <h2 className='headerH'> <b className='headerOneH'>{this.state.trainType} </b>
                             <br/>                           <b className='traintype'> {this.state.levelType} </b></h2>
                         <List className='headerbut'>
                             <Cell
-                                before={<Icon28RefreshOutline width={20} height={20} style={{color:'white'}}/>}
+                                before={<Icon28RefreshOutline width={20} height={20} style={{color:'#141f50'}}/>}
                                 onClick={this.makeCipher}
                                 data-mode="all"
                             >
-                                <b className='refreshbut'>Обновить задачу </b>
+                                <b className='refreshbut'>Обновить </b>
                             </Cell>
-                            <Cell
-                                data-mode="rightAns"
-                            >
                                 <b className='refreshbut'> Верных ответов: {this.state.numberOfDone}</b>
-                            </Cell>
                         </List>
                     </Div>
                 <Group>
-                    <div style={{display:'flex'}}>
                         <SimpleCell>
                             <InfoRow>
                                 <b className='Mosttext'>Зашифрованное сообщение:</b>
@@ -338,7 +332,6 @@ class HomePanelTrain extends React.Component {
                         </InfoRow>
                     </SimpleCell>
                     }
-                    </div>
                     {this.state.allowtip && <Div> {this.state.helptext}</Div>}
                     <Div>
                         <b className='Mosttext'>Задача:</b>

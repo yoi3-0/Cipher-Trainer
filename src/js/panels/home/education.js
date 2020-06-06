@@ -18,6 +18,7 @@ import {
 } from "@vkontakte/vkui";
 import {setFormData} from "../../store/formData/actions";
 import Icon24BrowserBack from '@vkontakte/icons/dist/24/browser_back';
+import IS_WEB from '@vkontakte/vk-bridge';
 
 class HomePanelProfile extends React.Component {
 
@@ -52,7 +53,7 @@ class HomePanelProfile extends React.Component {
             <Panel id={id} className='edu_one'>
                 <Div className='headercontent'>
                     <Button mode="tertiary" size="l" before={<Icon24BrowserBack/>} onClick={() => goBack()} className='backButt'>
-                        <h3>Главная</h3>
+                        <h3>&nbsp;</h3>
                     </Button>
                     <h2 className='headertext'> Обучение</h2>
                 </Div >
