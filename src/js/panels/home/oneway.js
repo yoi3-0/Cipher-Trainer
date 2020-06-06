@@ -31,6 +31,7 @@ import {
     PanelHeaderContext,
     PanelHeaderContent,
     Input, Alert,
+    FormLayout,
     Snackbar, Avatar
 } from "@vkontakte/vkui";
 import {setFormData} from "../../store/formData/actions";
@@ -255,8 +256,9 @@ class HomePanelTrain extends React.Component {
     {
         this.openPopout()
     }
-    confirmInput()
+    confirmInput = (e) =>
     {
+        e.preventDefault();
         if (this.state.inputData.answer.indexOf('x')==-1) {this.wrongInput(); return;}
         let decoded="";
         let codeG=this.state.inputData.answer;
@@ -347,15 +349,17 @@ class HomePanelTrain extends React.Component {
                         </InfoRow>
                     </Div>
                 </Group>
-                <Div style={{display:'flex'}}>
+                <form onSubmit={this.confirmInput} >
+                <div style={{display:'flex'}}>
                     <Input value={this.state.inputData.answer}
-                           type="text" with pattern="[0-9]*"
+                           type="text" with pattern="[Xx1-9\-\+\^\*\/\%)(]"
                            onChange={this.handleInput}
                            name="answer"
                            placeholder="Ваш ответ"
                            autoComplete="off"/>
-                    <Button size="l" className="startbutt"  onClick={this.confirmInput}>Применить функцию</Button>
-                    </Div>
+                    <Button size="l" className="startbutt" >Применить функцию</Button>
+                    </div>
+                </form>
             </Panel>
         );
     }
