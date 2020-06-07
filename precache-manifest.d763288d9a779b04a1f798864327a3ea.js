@@ -4,8 +4,8 @@ self.__precacheManifest = [
     "url": "/Cipher-Trainer/static/media/train_fon.77e24468.png"
   },
   {
-    "revision": "c9da95d442a318130e25",
-    "url": "/Cipher-Trainer/static/css/main.9dfb9664.chunk.css"
+    "revision": "51e1429b053e6922057c",
+    "url": "/Cipher-Trainer/static/css/main.e15076f0.chunk.css"
   },
   {
     "revision": "e96a758c18cecd5df506",
@@ -32,7 +32,7 @@ self.__precacheManifest = [
     "url": "/Cipher-Trainer/static/media/open-sans-v17-latin-regular.33543c5c.woff2"
   },
   {
-    "revision": "c9da95d442a318130e25",
+    "revision": "51e1429b053e6922057c",
     "url": "/Cipher-Trainer/static/js/main.76379aae.chunk.js"
   },
   {
@@ -64,7 +64,7 @@ self.__precacheManifest = [
     "url": "/Cipher-Trainer/static/css/2.bd12921c.chunk.css"
   },
   {
-    "revision": "d7ae1ebddd7d15a0dbfbfc03d99bc38f",
+    "revision": "5eb05978841073199c4588f4492ed9c2",
     "url": "/Cipher-Trainer/index.html"
   }
 ];
