@@ -6,9 +6,18 @@
     font-family: Computer;
     src: url(../../../fonts/computer.ttf);
 }
+/* open-sans-regular - latin */
 @font-face {
     font-family: OpenSans;
-    src: url(../../../fonts/OpenSans.ttf);
+    font-style: normal;
+    font-weight: 400;
+    src: url('../../../fonts/open-sans-v17-latin-regular.eot'); /* IE9 Compat Modes */
+    src: local('Open Sans Regular'), local('OpenSans-Regular'),
+    url('../../../fonts/open-sans-v17-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('../../../fonts/open-sans-v17-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
+    url('../../../fonts/open-sans-v17-latin-regular.woff') format('woff'), /* Modern Browsers */
+    url('../../../fonts/open-sans-v17-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+    url('../../../fonts/open-sans-v17-latin-regular.svg#OpenSans') format('svg'); /* Legacy iOS */
 }
 .startbutt{
     text-align: center;
@@ -80,7 +89,7 @@
 
 }
 .headerOneH{
-    font-size: 20pt;
+    font-size: 18pt;
     color: #141f50;
     font-family: OpenSans;
     left: 50%;
@@ -105,6 +114,7 @@
     position: relative;
 }
 .headerH {
+    font-size: small;
     position: absolute;
     left: 50%;
     -webkit-transform: translate(-50%);
@@ -164,7 +174,7 @@
     transform: translateY(-50%);
 }
 .traintype{
-    font-size: large;
+    font-size: medium;
     color: #5f6b9f;
     font-family: OpenSans;
     left: 50%;

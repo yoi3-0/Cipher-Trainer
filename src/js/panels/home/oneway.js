@@ -309,7 +309,7 @@ class HomePanelTrain extends React.Component {
                             >
                                 <b className='refreshbut'>Обновить </b>
                             </Cell>
-                                <b className='refreshbut'> Верных ответов: {this.state.numberOfDone}</b>
+                            {this.state.levelData.level!=='0'&&  <b className='refreshbut'> Верных ответов: {this.state.numberOfDone}</b> }
                         </List>
                     </Div>
                 <Group>
@@ -350,15 +350,16 @@ class HomePanelTrain extends React.Component {
                     </Div>
                 </Group>
                 <form onSubmit={this.confirmInput} >
-                <div style={{display:'flex'}}>
+                <Div style={{display:'flex'}}>
                     <Input value={this.state.inputData.answer}
-                           type="text" with pattern="[Xx1-9\-\+\^\*\/\%)(]"
+                           type="text"
+                           pattern="[Xx0-9\-\+\/\^\*\(\)%]*"
                            onChange={this.handleInput}
                            name="answer"
                            placeholder="Ваш ответ"
                            autoComplete="off"/>
                     <Button size="l" className="startbutt" >Применить функцию</Button>
-                    </div>
+                    </Div>
                 </form>
             </Panel>
         );
