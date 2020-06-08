@@ -104,7 +104,7 @@ class HomePanelTrain extends React.Component {
         let trainType, levelType;
         switch(this.state.levelData.type)
         {
-            case "1": trainType='Обратные функции'; break;
+            case "1": trainType='ОБРАТНЫЕ ФУНКЦИИ'; break;
             default: trainType="Ошибка"; break;
         }
         switch(this.state.levelData.level)
@@ -115,6 +115,7 @@ class HomePanelTrain extends React.Component {
             case "3": levelType='Тяжёлый уровень'; break;
             default: levelType="Ошибка"; break;
         }
+        levelType=levelType.toUpperCase();
         this.setState({
             trainType: trainType,
             levelType: levelType,

@@ -94,7 +94,7 @@ class HomePanelTrain extends React.Component {
                     <Button mode="tertiary" size="l" before={<Icon24BrowserBack/>} onClick={() => goBack()} className='backButt'>
                         <h3>&nbsp;</h3>
                     </Button>
-                    <h2 className='headertext'> Настройка</h2>
+                    <h2 className='headertext'> НАСТРОЙКА</h2>
                 </Div>
                 <Group className='selects'>
                     <FormLayout>

@@ -189,8 +189,9 @@
     color: #141f50;
 }
 .Mosttext{
-    font-family: Computer;
-    font-size: xx-large;
+    font-family: OpenSans;
+    font-size: larger;
+    color: #141f50;
     margin-bottom: auto;
 }
 .desctext{
@@ -231,6 +232,7 @@
     font-family: OpenSans;
 }
 .headerEdu{
-    font-family: Computer !important;
-    font-size: xx-large;
+    font-family: OpenSans !important;
+    color: #141f50;
+    font-size: larger;
 }
