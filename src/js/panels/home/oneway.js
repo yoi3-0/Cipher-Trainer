@@ -219,7 +219,7 @@ class HomePanelTrain extends React.Component {
                 let module=this.getRandomInt(20)+33;
                 for (let i=0;i<message.length;i++)
                     itog+=String.fromCodePoint(1072+Number((message.charCodeAt(i)-1071)+cons1)%module);
-                tip=<div>Сперва перенесем 1 из правой части в левую: <b>y-1=x+{cons1}%{module}</b>.
+                tip=<div>Сперва перенесем 1 из правой части в левую: <b>y-1=x+{cons1}mod{module}</b>.
                      Сделаем замену <b>x<sub>1</sub> = x - 1</b> и <b>y<sub>1</sub> = y - 1</b>, после чего
                     "снимем" <b>mod</b> и получим сл. уравнение: <b>y<sub>1</sub>=x<sub>1</sub>+{cons1+1}</b>
                      Перенесем <b>{cons1} + 1</b> в левую часть уравнения, навесим <b>mod</b> и раскроем
@@ -237,7 +237,12 @@ class HomePanelTrain extends React.Component {
                 }
                 for (let i=0;i<message.length;i++)
                     itog+=String.fromCodePoint(1072+Number((message.charCodeAt(i)-1071)*cons2)%module2);
-                tip="Очень крутое пояснение решения."
+                tip=<div>Сперва перенесем <b>1</b> из правой части в левую: <b>y-1=(x*{cons2})mod {module2}</b>
+                    Сделаем замену <b>x<sub>1</sub> = x - 1</b> и <b>y<sub>1</sub> = y - 1</b>, после чего
+                    Домножим и поделим в правой части уравнения на <b>mod</b> и получим сл. уравнение: <b>y-1=((x+1)*{cons2}-{cons2})*{cons2}<sup>-1</sup>/{cons2}<sup>-1</sup>)mod  {module2}</b>.
+                     Снимем <b>mod</b> и получим сл. уравнение: *(y-1+{cons2})*{cons2}^-1=x*. Осталось навесить обратно <b>mod</b> и раскрыть
+                    <b>x<sub>1</sub></b> и <b>y<sub>1</sub></b>, поздравляю, вы нашли обратное уравнение!
+                    <b> y = ({cons2}<sup>-1</sup>)(x - {cons2} - 1)) mod {module2} + 1</b></div>
                 this.setState({CipherFunc: "(x*"+cons2+")%"+module2+"+1", helptext: tip});
                 break;
             case "3":
@@ -249,6 +254,10 @@ class HomePanelTrain extends React.Component {
                     case 3: module3=43; break;
                     case 4: module3=47; break;
                     default: module3=37; break;
+                }
+                while (this.NOD(cons3,module3-1)!=1)
+                {
+                    cons3=this.getRandomInt(20)+2;
                 }
                 for (let i=0;i<message.length;i++) {
                     itog += String.fromCodePoint(1072 + Number((message.charCodeAt(i)-1071) ** 5) %37);
