@@ -219,7 +219,12 @@ class HomePanelTrain extends React.Component {
                 let module=this.getRandomInt(20)+33;
                 for (let i=0;i<message.length;i++)
                     itog+=String.fromCodePoint(1072+Number((message.charCodeAt(i)-1071)+cons1)%module);
-                tip="Очень крутое пояснение решения."
+                tip=<div>Сперва перенесем 1 из правой части в левую: <b>y-1=x+{cons1}%{module}</b>.
+                     Сделаем замену <b>x<sub>1</sub> = x - 1</b> и <b>y<sub>1</sub> = y - 1</b>, после чего
+                    "снимем" <b>mod</b> и получим сл. уравнение: <b>y<sub>1</sub>=x<sub>1</sub>+{cons1+1}</b>
+                     Перенесем <b>{cons1} + 1</b> в левую часть уравнения, навесим <b>mod</b> и раскроем
+                    <b> x<sub>1</sub></b> и <b>y<sub>1</sub></b>, поздравляю, вы нашли обратное уравнение!
+                    <b> y=({module}+(x-{cons1+2})%{module})%{module}+1</b></div>;
                 this.setState({CipherFunc: "(x+"+cons1+")%"+module+"+1", helptext: tip});
                 break;
             case "2":
@@ -237,14 +242,16 @@ class HomePanelTrain extends React.Component {
                 break;
             case "3":
                 let cons3=this.getRandomInt(10)+1;
-                let module3=this.getRandomInt(20)+33;
-                while (this.NOD(cons3,module3)!=1)
-                {
-                    cons3=this.getRandomInt(20)+1;
-                    module3=this.getRandomInt(20)+33;
+                let module3=this.getRandomInt(4)+1;
+                switch (module3) {
+                    case 1: module3=37; break;
+                    case 2: module3=41; break;
+                    case 3: module3=43; break;
+                    case 4: module3=47; break;
+                    default: module3=37; break;
                 }
                 for (let i=0;i<message.length;i++) {
-                    itog += String.fromCodePoint(1072 + Number((message.charCodeAt(i)-1071) ** cons3) %module3);
+                    itog += String.fromCodePoint(1072 + Number((message.charCodeAt(i)-1071) ** 5) %37);
                 }
                 tip="Очень крутое пояснение решения."
                 this.setState({CipherFunc: "(x^"+cons3+")%"+module3+"+1", helptext: tip});
@@ -335,7 +342,7 @@ class HomePanelTrain extends React.Component {
                         </InfoRow>
                     </SimpleCell>
                     }
-                    {this.state.allowtip && <Div> {this.state.helptext}</Div>}
+                    {this.state.allowtip && <Div><InfoRow className='desctext' id="tippy"> {this.state.helptext}</InfoRow></Div>}
                     <Div>
                         <b className='Mosttext'>Задача:</b>
                     <InfoRow className='desctext'>
