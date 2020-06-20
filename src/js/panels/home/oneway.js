@@ -219,11 +219,11 @@ class HomePanelTrain extends React.Component {
                 let module=this.getRandomInt(20)+33;
                 for (let i=0;i<message.length;i++)
                     itog+=String.fromCodePoint(1072+Number((message.charCodeAt(i)-1071)+cons1)%module);
-                tip=<div>Сперва перенесем 1 из правой части в левую: <b>y-1=x+{cons1}mod{module}</b>.
-                     Сделаем замену <b>x<sub>1</sub> = x - 1</b> и <b>y<sub>1</sub> = y - 1</b>, после чего
-                    "снимем" <b>mod</b> и получим сл. уравнение: <b>y<sub>1</sub>=x<sub>1</sub>+{cons1+1}</b>
-                     Перенесем <b>{cons1} + 1</b> в левую часть уравнения, навесим <b>mod</b> и раскроем
-                    <b> x<sub>1</sub></b> и <b>y<sub>1</sub></b>, поздравляю, вы нашли обратное уравнение!
+                tip=<div>Сперва перенесем <b>1</b> из правой части в левую: <b>y - 1 = (x + {cons1}) mod {module}</b>.
+                    Сделаем замену <b>x<sub>1</sub> = x - 1</b> и <b>y<sub>1</sub> = y - 1</b>, после чего
+                     "снимем" <b>mod</b> и получим сл. уравнение: <b>y<sub>1</sub> = x<sub>1</sub> + {cons1+1} </b>
+                    Перенесем <b>{cons1+1}</b> в левую часть уравнения, "навесим" <b>mod</b> и раскроем
+                    <b> x<sub>1</sub></b> и <b>y<sub>1</sub></b>, не забудьте провернуть действие по предотвращению появления отрицательных значений!
                     <b> y=({module}+(x-{cons1+2})%{module})%{module}+1</b></div>;
                 this.setState({CipherFunc: "(x+"+cons1+")%"+module+"+1", helptext: tip});
                 break;
@@ -237,10 +237,10 @@ class HomePanelTrain extends React.Component {
                 }
                 for (let i=0;i<message.length;i++)
                     itog+=String.fromCodePoint(1072+Number((message.charCodeAt(i)-1071)*cons2)%module2);
-                tip=<div>Сперва перенесем <b>1</b> из правой части в левую: <b>y-1=(x*{cons2})mod {module2}</b>
+                tip=<div>Сперва перенесем <b>1</b> из правой части в левую: <b>y - 1 = (x*{cons2}) mod {module2}</b>
                     Сделаем замену <b>x<sub>1</sub> = x - 1</b> и <b>y<sub>1</sub> = y - 1</b>, после чего
-                    Домножим и поделим в правой части уравнения на <b>mod</b> и получим сл. уравнение: <b>y-1=((x+1)*{cons2}-{cons2})*{cons2}<sup>-1</sup>/{cons2}<sup>-1</sup>)mod  {module2}</b>.
-                     Снимем <b>mod</b> и получим сл. уравнение: *(y-1+{cons2})*{cons2}^-1=x*. Осталось навесить обратно <b>mod</b> и раскрыть
+                    Домножим и поделим в правой части уравнения на <b>{cons2}<sup>-1</sup></b>, т.е. на обратное по умножению к <b>{cons2}</b> в кольце вычетов {module2}, и получим сл. уравнение: <b>y - 1 = ((x - 1)*{cons2}+{cons2})*{cons2}<sup>-1</sup>/{cons2}<sup>-1</sup>) mod {module2}</b>.
+                    Снимем <b>mod</b> и получим сл. уравнение: <b>(y - 1 - {cons2})*{cons2}<sup>-1</sup> = x</b>. Осталось навесить обратно <b>mod</b> и раскрыть
                     <b>x<sub>1</sub></b> и <b>y<sub>1</sub></b>, поздравляю, вы нашли обратное уравнение!
                     <b> y = ({cons2}<sup>-1</sup>)(x - {cons2} - 1)) mod {module2} + 1</b></div>
                 this.setState({CipherFunc: "(x*"+cons2+")%"+module2+"+1", helptext: tip});
@@ -262,7 +262,8 @@ class HomePanelTrain extends React.Component {
                 for (let i=0;i<message.length;i++) {
                     itog += String.fromCodePoint(1072 + Number((message.charCodeAt(i)-1071) ** cons3) %module3);
                 }
-                tip="Очень крутое пояснение решения."
+                tip=<div>Проверьте, правильно ли вы нашли <b>a<sup>-1</sup></b>, затем проверьте, правильно ли вы разложили <b>x<sup>a<sup>-1</sup></sup></b> по алгоритму быстрого возведения в степень,
+                     за этими проверками нужно посмотреть, правильно ли вы выставили все операции взятия остатка от деления, а также не забыли ли заменить <b>x</b> на <b>x - 1</b> и вычесть/добавить <b>1</b>.</div>;
                 this.setState({CipherFunc: "(x^"+cons3+")%"+module3+"+1", helptext: tip});
                 break;
             default: itog="Ошибка"
