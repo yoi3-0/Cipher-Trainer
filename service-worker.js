@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/Cipher-Trainer/precache-manifest.96c722938bd7ad1562886e99f6516b35.js"
+  "/Cipher-Trainer/precache-manifest.8b6535dac230704ec91ca2c4c179b776.js"
 );
 
 workbox.clientsClaim();
