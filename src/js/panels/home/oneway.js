@@ -246,7 +246,7 @@ class HomePanelTrain extends React.Component {
                 this.setState({CipherFunc: "(x*"+cons2+")%"+module2+"+1", helptext: tip});
                 break;
             case "3":
-                let cons3=this.getRandomInt(10)+1;
+                let cons3=this.getRandomInt(9)+2;
                 let module3=this.getRandomInt(4)+1;
                 switch (module3) {
                     case 1: module3=37; break;
@@ -257,7 +257,7 @@ class HomePanelTrain extends React.Component {
                 }
                 while (this.NOD(cons3,module3-1)!=1)
                 {
-                    cons3=this.getRandomInt(10)+1;
+                    cons3=this.getRandomInt(9)+2;
                 }
                 for (let i=0;i<message.length;i++) {
                     itog += String.fromCodePoint(1072 + Number((message.charCodeAt(i)-1071) ** cons3) %module3);
