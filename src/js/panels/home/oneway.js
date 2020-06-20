@@ -257,10 +257,10 @@ class HomePanelTrain extends React.Component {
                 }
                 while (this.NOD(cons3,module3-1)!=1)
                 {
-                    cons3=this.getRandomInt(20)+2;
+                    cons3=this.getRandomInt(10)+1;
                 }
                 for (let i=0;i<message.length;i++) {
-                    itog += String.fromCodePoint(1072 + Number((message.charCodeAt(i)-1071) ** 5) %37);
+                    itog += String.fromCodePoint(1072 + Number((message.charCodeAt(i)-1071) ** cons3) %module3);
                 }
                 tip="Очень крутое пояснение решения."
                 this.setState({CipherFunc: "(x^"+cons3+")%"+module3+"+1", helptext: tip});
